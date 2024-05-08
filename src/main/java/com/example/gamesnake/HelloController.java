@@ -27,23 +27,35 @@ public class HelloController {
 
     @FXML
     void initialize() {
-        StartButton.setBackground(null);
-        RuleButton.setBackground(null);
+        //StartButton.setBackground(null);
+        //RuleButton.setBackground(null);
     }
     @FXML
     void RuleButtonClicked(MouseEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("rule.fxml"));
         Parent root = fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setOpacity(1);
-        stage.setTitle("Rule");
-        stage.setScene(new Scene(root, 600, 600));
-        stage.showAndWait();
+        Stage lastStage = (Stage) RuleButton.getScene().getWindow();
+        lastStage.close();
+        Stage newStage = new Stage();
+        newStage.initModality(Modality.APPLICATION_MODAL);
+        newStage.setOpacity(1);
+        newStage.setTitle("Rule");
+        newStage.setScene(new Scene(root, 700, 700));
+        newStage.show();
+
     }
     @FXML
-    void StartButtonClicked(MouseEvent event) {
-        System.out.println("12345");
+    void StartButtonClicked(MouseEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("game.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage lastStage = (Stage) RuleButton.getScene().getWindow();
+        lastStage.close();
+        Stage newStage = new Stage();
+        newStage.initModality(Modality.APPLICATION_MODAL);
+        newStage.setOpacity(1);
+        newStage.setTitle("Game");
+        newStage.setScene(new Scene(root, 700, 700));
+        newStage.show();
     }
 
 
