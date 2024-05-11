@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8d5d7fe1-7392-4b17-9c1c-992e97c1c5d0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Images/яблоко.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamesnake/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamesnake/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamesnake/Keyboard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamesnake/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamesnake/HelloApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/gamesnake/game.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/gamesnake/game.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
