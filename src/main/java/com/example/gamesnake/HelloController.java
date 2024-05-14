@@ -24,6 +24,8 @@ public class HelloController {
 
     @FXML
     private Button StartButton;
+    @FXML
+    private Button TutorialButton;
 
     @FXML
     void initialize() {
@@ -47,6 +49,20 @@ public class HelloController {
     @FXML
     void StartButtonClicked(MouseEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("game.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage lastStage = (Stage) RuleButton.getScene().getWindow();
+        lastStage.close();
+        Stage newStage = new Stage();
+        newStage.initModality(Modality.APPLICATION_MODAL);
+        newStage.setOpacity(1);
+        newStage.setTitle("Game");
+        newStage.setScene(new Scene(root, 700, 700));
+        newStage.show();
+    }
+
+    @FXML
+    void TutorialButtonClicked(MouseEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("tutorial.fxml"));
         Parent root = fxmlLoader.load();
         Stage lastStage = (Stage) RuleButton.getScene().getWindow();
         lastStage.close();

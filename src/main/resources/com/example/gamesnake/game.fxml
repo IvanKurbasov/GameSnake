@@ -10,7 +10,7 @@
    <children>
       <Label fx:id="Label" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #90fc23af;" />
       <Button fx:id="snakeHead" layoutX="200.0" layoutY="400.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" />
-      <Button fx:id="snakeTail1" layoutX="200.0" layoutY="428.0" mnemonicParsing="false" onAction="#destroySnake" onMouseClicked="#destroySnake" prefHeight="28.0" prefWidth="28.0" />
+      <Button fx:id="snakeTail1" layoutX="200.0" layoutY="428.0" mnemonicParsing="false" onMouseClicked="#destroySnake" prefHeight="28.0" prefWidth="28.0" />
       <Button fx:id="snakeTail2" layoutX="200.0" layoutY="456.0" mnemonicParsing="false" onMouseClicked="#destroySnake" prefHeight="28.0" prefWidth="28.0" />
       <Button fx:id="appleButton" layoutY="7.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="25.0" style="-fx-background-color: transparent;">
          <graphic>
