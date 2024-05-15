@@ -286,6 +286,33 @@ public class TutorialController {
         }
     }
 
+    public void checkSnake(int i){
+        if (speedOfSnakeX[i] == speedOfSnakeX[i-1] && speedOfSnakeX[i] != 0){
+            if (Math.abs(snake[i].getLayoutX() - snake[i-1].getLayoutX()) < 28){
+                if (direction == 'R'){
+                    snake[i-1].setLayoutX(snake[i].getLayoutX()+28);
+                    //System.out.println("R");
+                }
+                if (direction == 'L'){
+                    snake[i-1].setLayoutX(snake[i].getLayoutX()-28);
+                    //System.out.println("L");
+                }
+            }
+        }
+        if (speedOfSnakeY[i] == speedOfSnakeY[i-1] && speedOfSnakeY[i] != 0){
+            if (Math.abs(snake[i].getLayoutY() - snake[i-1].getLayoutY()) < 28){
+                if (direction == 'U'){
+                    snake[i-1].setLayoutY(snake[i].getLayoutY()-28);
+                    //System.out.println("U");
+                }
+                if (direction == 'D'){
+                    snake[i-1].setLayoutY(snake[i].getLayoutY()+28);
+                    //System.out.println("D");
+                }
+            }
+        }
+    }
+
 
     public void move(){
         Thread thread = new Thread(new Runnable()
@@ -311,16 +338,7 @@ public class TutorialController {
                         }
                         else{
 
-                            if (speedOfSnakeX[i] == speedOfSnakeX[i-1] && speedOfSnakeX[i] != 0){
-                                if (Math.abs(snake[i].getLayoutX() - snake[i-1].getLayoutX()) != 28){
-                                    snake[i].setLayoutX(snake[i-1].getLayoutX() + 28);
-                                }
-                            }
-                            if (speedOfSnakeY[i] == speedOfSnakeY[i-1] && speedOfSnakeY[i] != 0){
-                                if (Math.abs(snake[i].getLayoutY() - snake[i-1].getLayoutY()) != 28){
-                                    snake[i].setLayoutY(snake[i-1].getLayoutY() + 28);
-                                }
-                            }
+                            checkSnake(i);
 
                             snake[i].setLayoutX(snake[i].getLayoutX() + speedOfSnakeX[i]);
                             snake[i].setLayoutY(snake[i].getLayoutY() + speedOfSnakeY[i]);
