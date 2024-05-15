@@ -56,8 +56,6 @@ public class GameController {
     private AnchorPane pane;
     @FXML
     private Button appleButton;
-
-    private Button newTail = new Button();
     double speed = 2;
     boolean newApple = false;
     char direction = 'U';
@@ -251,8 +249,6 @@ public class GameController {
     @FXML
     void destroySnake(MouseEvent event) {
     }
-
-
 //    @Override
 //    public String toString(){
 //        for (int i = 0; i < lengthOfArrayList; i++){
@@ -280,6 +276,18 @@ public class GameController {
                             snakeHead.setLayoutY(snakeHead.getLayoutY() + speedOfSnakeY[0]);
                         }
                         else{
+
+                            if (speedOfSnakeX[i] == speedOfSnakeX[i-1] && speedOfSnakeX[i] != 0){
+                                if (Math.abs(snake[i].getLayoutX() - snake[i-1].getLayoutX()) != 28){
+                                    snake[i].setLayoutX(snake[i-1].getLayoutX() + 28);
+                                }
+                            }
+                            if (speedOfSnakeY[i] == speedOfSnakeY[i-1] && speedOfSnakeY[i] != 0){
+                                if (Math.abs(snake[i].getLayoutY() - snake[i-1].getLayoutY()) != 28){
+                                    snake[i].setLayoutY(snake[i-1].getLayoutY() + 28);
+                                }
+                            }
+
                             snake[i].setLayoutX(snake[i].getLayoutX() + speedOfSnakeX[i]);
                             snake[i].setLayoutY(snake[i].getLayoutY() + speedOfSnakeY[i]);
 
