@@ -532,7 +532,7 @@ public void checkSnake(int i){
                             snakeHead.setLayoutY(snakeHead.getLayoutY() + speedOfSnakeY[0]);
                         }
                         else{
-                            checkSnake(i);
+                        checkSnake(i);
                             snake[i].setLayoutX(snake[i].getLayoutX() + speedOfSnakeX[i]);
                             snake[i].setLayoutY(snake[i].getLayoutY() + speedOfSnakeY[i]);
 
