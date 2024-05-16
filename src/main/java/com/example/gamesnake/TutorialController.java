@@ -19,16 +19,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class TutorialController {
+public class TutorialController extends HelloApplication{
     public javafx.scene.image.ImageView appleImage;
-    @FXML
-    private Button appleButton;
     boolean newApple = false;
     int coordinatesOfAppleX = 0;
     int coordinatesOfAppleY = 0;
     Random random = new Random();
     int visibleSnake = 3;
-
+    @FXML
+    private Button appleButton;
+    @FXML
+    private AnchorPane pane;
     @FXML
     private Button ToMenuButton;
     @FXML
@@ -90,7 +91,6 @@ public class TutorialController {
     ArrayList<Double> rotateCoordinatesX = new ArrayList<>();
     ArrayList<Double> rotateCoordinatesY = new ArrayList<>();
     int[] numberOfRotate = new int[snakeLength];
-
 
     @FXML
     void initialize() {
@@ -313,13 +313,19 @@ public class TutorialController {
         }
     }
 
-
     public void move(){
         Thread thread = new Thread(new Runnable()
         {
             public void run()
             {
                 while (true) {
+
+                    System.out.println("qwerty");
+
+                    if (finish){
+                        break;
+                    }
+
                     if (needToCreateApple){
                         Apple();
                     }
@@ -371,6 +377,7 @@ public class TutorialController {
 
     @FXML
     void ToMenuButtonClicked(MouseEvent event) throws IOException {
+        finish = true;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
         Parent root = fxmlLoader.load();
         Stage newStage = new Stage();
@@ -384,3 +391,4 @@ public class TutorialController {
     }
 
 }
+

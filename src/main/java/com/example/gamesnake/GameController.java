@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 
+import javax.swing.*;
 import javax.swing.text.html.ImageView;
 
 public class GameController {
@@ -284,8 +285,6 @@ public class GameController {
             }
         }
     }
-
-
     public void move(){
         Thread thread = new Thread(new Runnable()
         {
