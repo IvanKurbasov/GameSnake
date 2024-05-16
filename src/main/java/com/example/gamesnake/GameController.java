@@ -10,13 +10,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-
-import javax.swing.text.html.ImageView;
 
 public class GameController {
 
     public javafx.scene.image.ImageView appleImage;
+    public javafx.scene.image.ImageView armorImage;
 
     @FXML
     private ResourceBundle resources;
@@ -56,22 +54,31 @@ public class GameController {
     private AnchorPane pane;
     @FXML
     private Button appleButton;
+    @FXML
+    private Button armorButton;
 
     private Button newTail = new Button();
     double speed = 2;
     boolean newApple = false;
+    boolean help = false;
     char direction = 'U';
     int snakeLength = 10;
     int visibleSnake = 3;
     int lengthOfArrayList = 0;
     int coordinatesOfAppleX = 0;
     int coordinatesOfAppleY = 0;
+    int coordinatesOfDefX = 0;
+    int coordinatesOfDefY = 0;
     Button[] snake = new Button[snakeLength];
     double[] speedOfSnakeX = new double[snakeLength];
     double[] speedOfSnakeY = new double[snakeLength];
     ArrayList<Double> rotateCoordinatesX = new ArrayList<>();
     ArrayList<Double> rotateCoordinatesY = new ArrayList<>();
     int[] numberOfRotate = new int[snakeLength];
+    int[] armortail = {10, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+
+    int scoreofarmor = 0;
+
     Random random = new Random();
 
     @FXML
@@ -105,7 +112,10 @@ public class GameController {
     }
 
     public void Apple(){
-        if (random.nextFloat(1) < 0.995){
+        Thread thread = new Thread(new Runnable()
+        {
+            public void run()
+            {
             coordinatesOfAppleX = random.nextInt(600) + 50;
             coordinatesOfAppleY = random.nextInt(600) + 50;
             newApple = true;
@@ -114,44 +124,218 @@ public class GameController {
                 if (Math.abs(snake[i].getLayoutX() - coordinatesOfAppleX) < 30 || Math.abs(snake[i].getLayoutY() - coordinatesOfAppleY) < 30){
                     newApple = false;
                 }
+//                if(snake[i].getLayoutX() == coordinatesOfAppleX && snake[i].getLayoutY() == coordinatesOfAppleY) {
+//                    newApple = false;
+//                }
             }
 
             if (newApple && (!appleButton.isVisible())){
                 appleButton.setVisible(true);
                 appleButton.setLayoutX(coordinatesOfAppleX);
                 appleButton.setLayoutY(coordinatesOfAppleY);
+            }try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        }
+            }
+        });
+        thread.start();
     }
+
+    public void armorhelp() {
+        Thread thread = new Thread(new Runnable()
+        {
+            public void run()
+            {
+        if (visibleSnake <= 5) {
+            if (random.nextFloat(1) < 0.995) {
+                coordinatesOfDefX = random.nextInt(600) + 50;
+                coordinatesOfDefY = random.nextInt(600) + 50;
+                for (int i = 0; i <= snakeLength - 1; i++) {
+                    if (Math.abs(snake[i].getLayoutX() - coordinatesOfDefX) < 30 || Math.abs(snake[i].getLayoutY() - coordinatesOfDefY) < 30) {
+                        help = false;
+                        break;
+                    } else {
+                        help = true;
+                    }
+                }
+            }
+            if (help && (!armorButton.isVisible())) {
+                armorButton.setVisible(true);
+                armorButton.setLayoutX(coordinatesOfDefX);
+                armorButton.setLayoutY(coordinatesOfDefY);
+            }
+        } else {
+            armorButton.setVisible(false);
+        }
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+
+    }
+
+
 
 
 
     public void checkCollisionOfSnakeHeadAndApple() {
-        if (appleButton.isVisible()){
-            double maxX = Math.max(snakeHead.getLayoutX(), appleButton.getLayoutX());
-            double maxY = Math.max(snakeHead.getLayoutY(), appleButton.getLayoutY());
-            double minX = Math.min(snakeHead.getLayoutX() + snakeHead.getWidth(), appleButton.getLayoutX() + appleButton.getWidth());
-            double minY = Math.min(snakeHead.getLayoutY() + snakeHead.getHeight(), appleButton.getLayoutY() + appleButton.getHeight());
-            if (maxX >= minX - 10 || maxY >= minY - 10){
-                int a = 0;
+        Thread thread = new Thread(new Runnable()
+        {
+            public void run()
+            {
+        if (appleButton.isVisible() && isFlagforapple()){
+//            double maxX = Math.max(snakeHead.getLayoutX(), appleButton.getLayoutX());
+//            double maxY = Math.max(snakeHead.getLayoutY(), appleButton.getLayoutY());
+//            double minX = Math.min(snakeHead.getLayoutX() + snakeHead.getWidth(), appleButton.getLayoutX() + appleButton.getWidth());
+//            double minY = Math.min(snakeHead.getLayoutY() + snakeHead.getHeight(), appleButton.getLayoutY() + appleButton.getHeight());
+//            if (maxX >= minX - 10 || maxY >= minY - 10){
+//                int a = 0;
+//            }
+            appleButton.setVisible(false);
+            coordinatesOfAppleY = 0;
+            coordinatesOfAppleX = 0;
+            snakeGrowth();
             }
             else{
-                appleButton.setVisible(false);
-                coordinatesOfAppleY = 0;
-                coordinatesOfAppleX = 0;
-                snakeGrowth();
+                return;
+            }try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+            }
+        });
+        thread.start();
         }
 
+    public void checkCollisionOfSnakeHeadAndarmorButton() {
+        Thread thread = new Thread(new Runnable()
+        {
+            public void run()
+            {
+        if (armorButton.isVisible() && isFlagforarmor()) {
+            System.out.println(armorButton.getLayoutX());
+            System.out.println(armorButton.getLayoutY());
+            armorButton.setVisible(false);
+            if(!armorButton.isVisible()) {
+                System.out.println("Невидима");
+                System.out.println(armorButton.isVisible());
+                System.out.println(armorButton.getLayoutX());
+                System.out.println(armorButton.getLayoutY());
+            }
+            coordinatesOfDefX = 0;
+            coordinatesOfDefY = 0;
+            snakeArmor();
+        }
+            else {
+                return;
+            }
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+        }
+
+    public boolean isFlagforarmor() {
+        if (snakeHead.getLayoutX() < armorButton.getLayoutX() + armorButton.getWidth() && snakeHead.getLayoutX() > armorButton.getLayoutX() && snakeHead.getLayoutY() > armorButton.getLayoutY() && snakeHead.getLayoutY() < armorButton.getLayoutY() + armorButton.getHeight()) {
+            System.out.println("был");
+            return true;
+
+        } else if (snakeHead.getLayoutX() + snakeHead.getWidth() < armorButton.getLayoutX() + armorButton.getWidth() && snakeHead.getLayoutX() + snakeHead.getWidth() > armorButton.getLayoutX() && snakeHead.getLayoutY() > armorButton.getLayoutY() && snakeHead.getLayoutY() < armorButton.getLayoutY() + armorButton.getHeight()) {
+            System.out.println("был");
+            return true;
+
+        } else if(snakeHead.getLayoutX() < armorButton.getLayoutX() + armorButton.getWidth() && snakeHead.getLayoutX() > armorButton.getLayoutX() && snakeHead.getLayoutY() + snakeHead.getHeight() > armorButton.getLayoutY() && snakeHead.getLayoutY() + snakeHead.getHeight() < armorButton.getLayoutY() + armorButton.getHeight()) {
+            System.out.println("был");
+            return true;
+        } else if(snakeHead.getLayoutX() + snakeHead.getWidth() < armorButton.getLayoutX() + armorButton.getWidth() && snakeHead.getLayoutX() + snakeHead.getWidth() > armorButton.getLayoutX() && snakeHead.getLayoutY() + snakeHead.getHeight() > armorButton.getLayoutY() && snakeHead.getLayoutY() + snakeHead.getHeight() < armorButton.getLayoutY() + armorButton.getHeight()) {
+            System.out.println("был");
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    public boolean isFlagforapple() {
+        if (snakeHead.getLayoutX() < appleButton.getLayoutX() + appleButton.getWidth() && snakeHead.getLayoutX() > appleButton.getLayoutX() && snakeHead.getLayoutY() > appleButton.getLayoutY() && snakeHead.getLayoutY() < appleButton.getLayoutY() + appleButton.getHeight()) {
+            System.out.println("был");
+            return true;
+
+        } else if (snakeHead.getLayoutX() + snakeHead.getWidth() < appleButton.getLayoutX() + appleButton.getWidth() && snakeHead.getLayoutX() + snakeHead.getWidth() > appleButton.getLayoutX() && snakeHead.getLayoutY() > appleButton.getLayoutY() && snakeHead.getLayoutY() < appleButton.getLayoutY() + appleButton.getHeight()) {
+            System.out.println("был");
+            return true;
+
+        } else if(snakeHead.getLayoutX() < appleButton.getLayoutX() + appleButton.getWidth() && snakeHead.getLayoutX() > appleButton.getLayoutX() && snakeHead.getLayoutY() + snakeHead.getHeight() > appleButton.getLayoutY() && snakeHead.getLayoutY() + snakeHead.getHeight() < appleButton.getLayoutY() + appleButton.getHeight()) {
+            System.out.println("был");
+            return true;
+        } else if(snakeHead.getLayoutX() + snakeHead.getWidth() < appleButton.getLayoutX() + appleButton.getWidth() && snakeHead.getLayoutX() + snakeHead.getWidth() > appleButton.getLayoutX() && snakeHead.getLayoutY() + snakeHead.getHeight() > appleButton.getLayoutY() && snakeHead.getLayoutY() + snakeHead.getHeight() < appleButton.getLayoutY() + appleButton.getHeight()) {
+            System.out.println("был");
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     public void snakeGrowth(){
+        Thread thread = new Thread(new Runnable()
+        {
+            public void run()
+            {
         if (visibleSnake < 10){
             snake[visibleSnake].setVisible(true);
             visibleSnake+=1;
+            if(appleButton.isVisible()){
+                appleButton.setVisible(false);
+            }
         }
         else{
             System.out.println("ПОБЕДА!!!!!!!!!");
+        }
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+    }
+
+    public void snakereduce(int a){
+        Thread thread = new Thread(new Runnable()
+        {
+            public void run()
+            {
+
+        snake[a].setVisible(false);
+        visibleSnake -= 1;
+        armortail[a] += 1;
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+    }
+
+    private void snakeArmor() {
+        scoreofarmor += 1;
+        for(int i = 0; i < visibleSnake; i++) {
+                armortail[i] += 1;
+                System.out.println("Броня для тела" + " " + i + " " + "Увеличена на" + " " + scoreofarmor);
         }
     }
 
@@ -249,8 +433,46 @@ public class GameController {
     }
 
     @FXML
-    void destroySnake(MouseEvent event) {
+    public void Pressmouse(MouseEvent event) {
+                for (int i = 0; i < snakeLength; i++) {
+                    if (event.getSource() == snake[i]) {
+                        ubivat(i);
+                        break;
+                    }
+                }
     }
+
+
+
+    public void ubivat(int a) {
+        Thread thread = new Thread(new Runnable()
+        {
+            public void run()
+            {
+                if (!snake[a].isVisible()) {
+                    return;
+                }
+                armortail[a] -= 1;
+                if (armortail[a] == 0) {
+                    for (int i = a; i < snakeLength; i++) {
+                        if (snake[i].isVisible()) {
+                            snakereduce(i);
+                        }
+                    }
+                }
+                if(visibleSnake < 3) {
+                    System.out.println("Проиграл!!!!!!!!");
+                }
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+    }
+
 
 
 //    @Override
@@ -261,6 +483,34 @@ public class GameController {
 //        }
 //        return "";
 //    }
+public void checkSnake(int i){
+    if (speedOfSnakeX[i] == speedOfSnakeX[i-1] && speedOfSnakeX[i] != 0){
+        if (Math.abs(snake[i].getLayoutX() - snake[i-1].getLayoutX()) < 28){
+            if (direction == 'R'){
+                snake[i-1].setLayoutX(snake[i].getLayoutX()+28);
+                //System.out.println("R");
+            }
+            if (direction == 'L'){
+                snake[i-1].setLayoutX(snake[i].getLayoutX()-28);
+                //System.out.println("L");
+            }
+        }
+    }
+    if (speedOfSnakeY[i] == speedOfSnakeY[i-1] && speedOfSnakeY[i] != 0){
+        if (Math.abs(snake[i].getLayoutY() - snake[i-1].getLayoutY()) < 28){
+            if (direction == 'U'){
+                snake[i-1].setLayoutY(snake[i].getLayoutY()-28);
+                //System.out.println("U");
+            }
+            if (direction == 'D'){
+                snake[i-1].setLayoutY(snake[i].getLayoutY()+28);
+                //System.out.println("D");
+            }
+        }
+    }
+}
+
+
 
     public void move(){
         Thread thread = new Thread(new Runnable()
@@ -270,8 +520,10 @@ public class GameController {
                 while (true) {
 
                     Apple();
+                    armorhelp();
 
                     checkCollisionOfSnakeHeadAndApple();
+                    checkCollisionOfSnakeHeadAndarmorButton();
 
 
                     for (int i = snakeLength - 1; i >= 0; i--){
@@ -280,6 +532,7 @@ public class GameController {
                             snakeHead.setLayoutY(snakeHead.getLayoutY() + speedOfSnakeY[0]);
                         }
                         else{
+                            checkSnake(i);
                             snake[i].setLayoutX(snake[i].getLayoutX() + speedOfSnakeX[i]);
                             snake[i].setLayoutY(snake[i].getLayoutY() + speedOfSnakeY[i]);
 
