@@ -10,6 +10,10 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+
+import javax.swing.*;
+import javax.swing.text.html.ImageView;
 
 public class GameController {
 
@@ -473,8 +477,6 @@ public class GameController {
         thread.start();
     }
 
-
-
 //    @Override
 //    public String toString(){
 //        for (int i = 0; i < lengthOfArrayList; i++){
@@ -512,6 +514,32 @@ public void checkSnake(int i){
 
 
 
+    public void checkSnake(int i){
+        if (speedOfSnakeX[i] == speedOfSnakeX[i-1] && speedOfSnakeX[i] != 0){
+            if (Math.abs(snake[i].getLayoutX() - snake[i-1].getLayoutX()) < 28){
+                if (direction == 'R'){
+                    snake[i-1].setLayoutX(snake[i].getLayoutX()+28);
+                    //System.out.println("R");
+                }
+                if (direction == 'L'){
+                    snake[i-1].setLayoutX(snake[i].getLayoutX()-28);
+                    //System.out.println("L");
+                }
+            }
+        }
+        if (speedOfSnakeY[i] == speedOfSnakeY[i-1] && speedOfSnakeY[i] != 0){
+            if (Math.abs(snake[i].getLayoutY() - snake[i-1].getLayoutY()) < 28){
+                if (direction == 'U'){
+                    snake[i-1].setLayoutY(snake[i].getLayoutY()-28);
+                    //System.out.println("U");
+                }
+                if (direction == 'D'){
+                    snake[i-1].setLayoutY(snake[i].getLayoutY()+28);
+                    //System.out.println("D");
+                }
+            }
+        }
+    }
     public void move(){
         Thread thread = new Thread(new Runnable()
         {
@@ -533,6 +561,9 @@ public void checkSnake(int i){
                         }
                         else{
                         checkSnake(i);
+
+                            checkSnake(i);
+
                             snake[i].setLayoutX(snake[i].getLayoutX() + speedOfSnakeX[i]);
                             snake[i].setLayoutY(snake[i].getLayoutY() + speedOfSnakeY[i]);
 

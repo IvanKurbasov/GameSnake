@@ -6,6 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="8d5d7fe1-7392-4b17-9c1c-992e97c1c5d0" name="Changes" comment="защита и уничтожение">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="8d5d7fe1-7392-4b17-9c1c-992e97c1c5d0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamesnake/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamesnake/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamesnake/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamesnake/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamesnake/TutorialController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamesnake/TutorialController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/gamesnake/tutorial.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/gamesnake/tutorial.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +29,13 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="jdkForImporter" value="openjdk-21 (2)" />
+      </MavenImportingSettings>
+    </option>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
@@ -45,9 +59,10 @@
     "jdk.selected.JAVA_MODULE": "jbr-17",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Admin/IdeaProjects/HomeWork/Lesson6_1",
-    "project.structure.last.edited": "Global Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2"
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.importing"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -57,6 +72,9 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Admin\IdeaProjects\HomeWork\GameSnake\src\main\resources\Images" />
       <recent name="C:\Users\Admin\IdeaProjects\HomeWork\GameSnake\src\main\java\Pictures" />
+    </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="com.example.gamesnake" />
     </key>
   </component>
   <component name="RunManager">
