@@ -218,7 +218,7 @@ public class GameController {
         thread.start();
         }
 
-    public void checkCollisionOfSnakeHeadAndarmorButton() {
+    public void checkCollisionOfSnakeHeadAndArmorButton() {
         Thread thread = new Thread(new Runnable()
         {
             public void run()
@@ -338,8 +338,8 @@ public class GameController {
     private void snakeArmor() {
         scoreofarmor += 1;
         for(int i = 0; i < visibleSnake; i++) {
-                armortail[i] += 1;
-                System.out.println("Броня для тела" + " " + i + " " + "Увеличена на" + " " + scoreofarmor);
+            armortail[i] += 1;
+            System.out.println("Броня для тела" + " " + i + " " + "Увеличена на" + " " + scoreofarmor);
         }
     }
 
@@ -438,12 +438,12 @@ public class GameController {
 
     @FXML
     public void Pressmouse(MouseEvent event) {
-                for (int i = 0; i < snakeLength; i++) {
-                    if (event.getSource() == snake[i]) {
-                        ubivat(i);
-                        break;
-                    }
-                }
+        for (int i = 0; i < snakeLength; i++) {
+            if (event.getSource() == snake[i]) {
+                ubivat(i);
+                break;
+            }
+        }
     }
 
 
@@ -485,34 +485,6 @@ public class GameController {
 //        }
 //        return "";
 //    }
-public void checkSnake(int i){
-    if (speedOfSnakeX[i] == speedOfSnakeX[i-1] && speedOfSnakeX[i] != 0){
-        if (Math.abs(snake[i].getLayoutX() - snake[i-1].getLayoutX()) < 28){
-            if (direction == 'R'){
-                snake[i-1].setLayoutX(snake[i].getLayoutX()+28);
-                //System.out.println("R");
-            }
-            if (direction == 'L'){
-                snake[i-1].setLayoutX(snake[i].getLayoutX()-28);
-                //System.out.println("L");
-            }
-        }
-    }
-    if (speedOfSnakeY[i] == speedOfSnakeY[i-1] && speedOfSnakeY[i] != 0){
-        if (Math.abs(snake[i].getLayoutY() - snake[i-1].getLayoutY()) < 28){
-            if (direction == 'U'){
-                snake[i-1].setLayoutY(snake[i].getLayoutY()-28);
-                //System.out.println("U");
-            }
-            if (direction == 'D'){
-                snake[i-1].setLayoutY(snake[i].getLayoutY()+28);
-                //System.out.println("D");
-            }
-        }
-    }
-}
-
-
 
     public void checkSnake(int i){
         if (speedOfSnakeX[i] == speedOfSnakeX[i-1] && speedOfSnakeX[i] != 0){
@@ -551,7 +523,7 @@ public void checkSnake(int i){
                     armorhelp();
 
                     checkCollisionOfSnakeHeadAndApple();
-                    checkCollisionOfSnakeHeadAndarmorButton();
+                    checkCollisionOfSnakeHeadAndArmorButton();
 
 
                     for (int i = snakeLength - 1; i >= 0; i--){
