@@ -15,12 +15,12 @@
                   <Font size="40.0" />
                </font>
             </Label>
-            <Label layoutX="21.0" layoutY="81.0" prefHeight="6.0" prefWidth="670.0" text="Первый игрок управляет змейкой, которая может ">
+            <Label layoutX="21.0" layoutY="81.0" prefHeight="6.0" prefWidth="670.0" text="Первый игрок управляет змейкой, которая может двигаться">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="21.0" layoutY="116.0" prefHeight="30.0" prefWidth="670.0" text="двигаться по игровому полю и питаться яблоками,">
+            <Label layoutX="21.0" layoutY="116.0" prefHeight="30.0" prefWidth="670.0" text="по игровому полю и питаться мелкими кубиками">
                <font>
                   <Font size="24.0" />
                </font>
@@ -35,62 +35,12 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="21.0" layoutY="221.0" prefHeight="30.0" prefWidth="670.0" text="поле игры в течение 3 минут.">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label layoutX="21.0" layoutY="256.0" prefHeight="30.0" prefWidth="670.0" text="Второй игрок управляет мышкой, которая может пере-">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label layoutX="21.0" layoutY="290.0" prefHeight="30.0" prefWidth="670.0" text="мещаться по полю и стрелять в змейку, чтобы уменьшить ">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label layoutX="21.0" layoutY="324.0" prefHeight="30.0" prefWidth="670.0" text="ее размер или полностью уничтожить. Цель мышки -">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label layoutX="21.0" layoutY="355.0" prefHeight="30.0" prefWidth="670.0" text="убить змейку до того, как пройдет 3 минуты.">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label layoutX="21.0" layoutY="390.0" prefHeight="30.0" prefWidth="670.0" text="Геймплей предполагает активное взаимодействие и">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label layoutX="21.0" layoutY="425.0" prefHeight="30.0" prefWidth="670.0" text="соревнование между игроками. Змейка должна умело">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label layoutX="21.0" layoutY="460.0" prefHeight="30.0" prefWidth="670.0" text="уклоняться от выстрелов мышки, собирать яблоки и ">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label layoutX="21.0" layoutY="495.0" prefHeight="30.0" prefWidth="670.0" text="стремиться достичь требуемого размера, а мышка">
+            <Label layoutX="19.0" layoutY="221.0" prefHeight="30.0" prefWidth="670.0" text="поле игры в течение 3 минут.">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <Label layoutX="21.0" layoutY="525.0" prefHeight="30.0" prefWidth="670.0" text="должна точно прицеливаться и стрелять, чтобы">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="17.0" layoutY="554.0" prefHeight="30.0" prefWidth="670.0" text=" уничтожить змейку как можно быстрее.">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>
