@@ -72,7 +72,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="21.0" layoutY="436.0" prefHeight="30.0" prefWidth="670.0" text="уклоняться от выстрелов мышки, собирать кубики и ">
+      <Label layoutX="21.0" layoutY="436.0" prefHeight="30.0" prefWidth="670.0" text="уклоняться от выстрелов мышки, собирать бонусы и ">
          <font>
             <Font size="24.0" />
          </font>
