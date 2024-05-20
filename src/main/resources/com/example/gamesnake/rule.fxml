@@ -55,6 +55,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
+            <Button layoutX="526.0" layoutY="613.0" mnemonicParsing="false" onMouseClicked="#NextPageButtonClicked" prefHeight="53.0" prefWidth="133.0" text="Далее" />
          </children>
       </AnchorPane>
       <Label layoutX="21.0" layoutY="349.0" prefHeight="30.0" prefWidth="670.0" text="Цель мышки - убить змейку до того, как пройдет 3 минуты.">
