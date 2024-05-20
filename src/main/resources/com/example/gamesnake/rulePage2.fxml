@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gamesnake.RuleController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gamesnake.RuleController">
     <children>
         <AnchorPane layoutX="-1.0" layoutY="-1.0" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #90fc23af;">
             <children>
@@ -13,6 +13,41 @@
                         <Font size="40.0" />
                     </font>
                 </Label>
+            <Label layoutX="15.0" layoutY="73.0" text="Игра заканчивается, когда один из игроков достигает">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="16.0" layoutY="96.0" text="своей цели - змейка либо продерживается на поле 3 минуты">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="16.0" layoutY="119.0" text="и становится достаточно большой, либо мышка убивает ">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="12.0" layoutY="142.0" text=" змейку. После окончания игры игроки могут обменяться ">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="12.0" layoutY="165.0" text=" ролями и попробовать выиграть в другой.">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="15.0" layoutY="196.0" text="Такая игра развивает реакцию, стратегическое мышление">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="12.0" layoutY="220.0" text=" и командную работу между игроками.">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
             </children>
         </AnchorPane>
     </children>
