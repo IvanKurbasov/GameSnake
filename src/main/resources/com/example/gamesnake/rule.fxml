@@ -2,54 +2,106 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gamesnake.RuleController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gamesnake.RuleController">
    <children>
       <AnchorPane layoutX="-1.0" layoutY="-1.0" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #90fc23af;">
          <children>
-            <Button fx:id="ExitButton" layoutX="33.0" layoutY="614.0" mnemonicParsing="false" onMouseClicked="#ExitButtonClicked" prefHeight="53.0" prefWidth="133.0" style="-fx-background-color: transparent;" text="Назад">
-               <font>
-                  <Font size="18.0" />
-               </font></Button>
+            <Button fx:id="ExitButton" layoutX="33.0" layoutY="614.0" mnemonicParsing="false" onMouseClicked="#ExitButtonClicked" prefHeight="53.0" prefWidth="133.0" text="Назад" />
             <Label layoutX="213.0" layoutY="14.0" prefHeight="58.0" prefWidth="273.0" text="Правила игры">
                <font>
                   <Font size="40.0" />
                </font>
             </Label>
-            <Label layoutX="21.0" layoutY="81.0" prefHeight="6.0" prefWidth="670.0" text="В игру играют двое. Первый управляет змейкой, второй - ">
+            <Label layoutX="21.0" layoutY="81.0" prefHeight="6.0" prefWidth="670.0" text="Первый игрок управляет змейкой, которая может двигаться">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="21.0" layoutY="116.0" prefHeight="30.0" prefWidth="670.0" text="мышкой. Цель змейки - прожить 3 минуты или достигнуть">
+            <Label layoutX="21.0" layoutY="116.0" prefHeight="30.0" prefWidth="670.0" text="по игровому полю и питаться яблоками">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="21.0" layoutY="151.0" prefHeight="30.0" prefWidth="670.0" text="размера 10. Цель мышки - убить змейку до истечения">
+            <Label layoutX="21.0" layoutY="151.0" prefHeight="30.0" prefWidth="670.0" text="чтобы увеличить свой размер. Чем больше размер">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="21.0" layoutY="186.0" prefHeight="30.0" prefWidth="670.0" text="времени">
+            <Label layoutX="21.0" layoutY="186.0" prefHeight="30.0" prefWidth="670.0" text="змейки, тем выше ее шансы выжить и продержаться на ">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button fx:id="nextPageButton" layoutX="584.0" layoutY="613.0" mnemonicParsing="false" onMouseClicked="#NextPageButtonClicked" prefHeight="54.0" prefWidth="66.0" style="-fx-background-color: transparent;">
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../Images/СтрелкаВправо.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
+            <Label layoutX="19.0" layoutY="221.0" prefHeight="30.0" prefWidth="670.0" text="поле игры в течение 3 минут.">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="21.0" layoutY="259.0" prefHeight="30.0" prefWidth="670.0" text="Второй игрок управляет мышкой, которая может">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="22.0" layoutY="290.0" prefHeight="30.0" prefWidth="670.0" text="перемещаться по полю и стрелять в змейку, чтобы">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="21.0" layoutY="318.0" prefHeight="30.0" prefWidth="670.0" text="уменьшить ее размер или полностью уничтожить.">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Button layoutX="526.0" layoutY="613.0" mnemonicParsing="false" onMouseClicked="#NextPageButtonClicked" prefHeight="53.0" prefWidth="133.0" text="Далее" />
          </children>
       </AnchorPane>
+      <Label layoutX="21.0" layoutY="349.0" prefHeight="30.0" prefWidth="670.0" text="Цель мышки - убить змейку до того, как пройдет 3 минуты.">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="21.0" layoutY="379.0" prefHeight="30.0" prefWidth="670.0" text="Геймплей предполагает активное взаимодействие и ">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="20.0" layoutY="407.0" prefHeight="30.0" prefWidth="670.0" text="соревнование между игроками. Змейка должна умело ">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="21.0" layoutY="436.0" prefHeight="30.0" prefWidth="670.0" text="уклоняться от выстрелов мышки, собирать бонусы и ">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="21.0" layoutY="466.0" prefHeight="30.0" prefWidth="670.0" text="стремиться достичь требуемого размера, а мышка должна">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="15.0" layoutY="495.0" prefHeight="30.0" prefWidth="670.0" text=" точно прицеливаться и стрелять, чтобы уничтожить">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="20.0" layoutY="524.0" prefHeight="30.0" prefWidth="670.0" text="змейку как можно быстрее.">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="20.0" layoutY="522.0" prefHeight="30.0" prefWidth="670.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="19.0" layoutY="543.0" prefHeight="30.0" prefWidth="670.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
