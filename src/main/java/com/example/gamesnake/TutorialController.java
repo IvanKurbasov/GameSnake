@@ -320,8 +320,6 @@ public class TutorialController extends HelloApplication{
             {
                 while (true) {
 
-                    System.out.println("qwerty");
-
                     if (finish){
                         break;
                     }
