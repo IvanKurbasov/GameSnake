@@ -19,16 +19,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class TutorialController {
+public class TutorialController extends HelloApplication{
     public javafx.scene.image.ImageView appleImage;
-    @FXML
-    private Button appleButton;
     boolean newApple = false;
     int coordinatesOfAppleX = 0;
     int coordinatesOfAppleY = 0;
     Random random = new Random();
     int visibleSnake = 3;
-
+    @FXML
+    private Button appleButton;
+    @FXML
+    private AnchorPane pane;
     @FXML
     private Button ToMenuButton;
     @FXML
@@ -90,7 +91,6 @@ public class TutorialController {
     ArrayList<Double> rotateCoordinatesX = new ArrayList<>();
     ArrayList<Double> rotateCoordinatesY = new ArrayList<>();
     int[] numberOfRotate = new int[snakeLength];
-
 
     @FXML
     void initialize() {
@@ -286,6 +286,32 @@ public class TutorialController {
         }
     }
 
+    public void checkSnake(int i){
+        if (speedOfSnakeX[i] == speedOfSnakeX[i-1] && speedOfSnakeX[i] != 0){
+            if (Math.abs(snake[i].getLayoutX() - snake[i-1].getLayoutX()) < 28){
+                if (direction == 'R'){
+                    snake[i-1].setLayoutX(snake[i].getLayoutX()+28);
+                    //System.out.println("R");
+                }
+                if (direction == 'L'){
+                    snake[i-1].setLayoutX(snake[i].getLayoutX()-28);
+                    //System.out.println("L");
+                }
+            }
+        }
+        if (speedOfSnakeY[i] == speedOfSnakeY[i-1] && speedOfSnakeY[i] != 0){
+            if (Math.abs(snake[i].getLayoutY() - snake[i-1].getLayoutY()) < 28){
+                if (direction == 'U'){
+                    snake[i-1].setLayoutY(snake[i].getLayoutY()-28);
+                    //System.out.println("U");
+                }
+                if (direction == 'D'){
+                    snake[i-1].setLayoutY(snake[i].getLayoutY()+28);
+                    //System.out.println("D");
+                }
+            }
+        }
+    }
 
     public void move(){
         Thread thread = new Thread(new Runnable()
@@ -293,6 +319,11 @@ public class TutorialController {
             public void run()
             {
                 while (true) {
+
+                    if (finish){
+                        break;
+                    }
+
                     if (needToCreateApple){
                         Apple();
                     }
@@ -310,9 +341,9 @@ public class TutorialController {
                             snakeHead.setLayoutY(snakeHead.getLayoutY() + speedOfSnakeY[0]);
                         }
                         else{
-//                            System.out.println(rotateCoordinatesX);
-//                            System.out.println(rotateCoordinatesY);
-//                            System.out.println(lenghtOfArrayList);
+
+                            checkSnake(i);
+
                             snake[i].setLayoutX(snake[i].getLayoutX() + speedOfSnakeX[i]);
                             snake[i].setLayoutY(snake[i].getLayoutY() + speedOfSnakeY[i]);
 
@@ -344,6 +375,7 @@ public class TutorialController {
 
     @FXML
     void ToMenuButtonClicked(MouseEvent event) throws IOException {
+        finish = true;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
         Parent root = fxmlLoader.load();
         Stage newStage = new Stage();
@@ -357,3 +389,4 @@ public class TutorialController {
     }
 
 }
+

@@ -24,8 +24,8 @@ public class RuleController {
 
     @FXML
     private Button ExitButton;
-    private TextFlow textFlow = new TextFlow();
-
+    @FXML
+    private Button PreviousPageButton;
     @FXML
     void ExitButtonClicked(MouseEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
@@ -39,11 +39,30 @@ public class RuleController {
         newStage.setScene(new Scene(root, 700, 700));
         newStage.show();
     }
-
     @FXML
-    void initialize() {
-        Text text = new Text("12345");
-        textFlow.getChildren().add(text);
+    void NextPageButtonClicked(MouseEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("rulePage2.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage newStage = new Stage();
+        Stage lastStage = (Stage) ExitButton.getScene().getWindow();
+        lastStage.close();
+        newStage.initModality(Modality.APPLICATION_MODAL);
+        newStage.setOpacity(1);
+        newStage.setTitle("GameSnake");
+        newStage.setScene(new Scene(root, 700, 700));
+        newStage.show();
     }
-
+    @FXML
+    void PreviousPageButtonClicked(MouseEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("rule.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage newStage = new Stage();
+        Stage lastStage = (Stage) PreviousPageButton.getScene().getWindow();
+        lastStage.close();
+        newStage.initModality(Modality.APPLICATION_MODAL);
+        newStage.setOpacity(1);
+        newStage.setTitle("GameSnake");
+        newStage.setScene(new Scene(root, 700, 700));
+        newStage.show();
+    }
 }
