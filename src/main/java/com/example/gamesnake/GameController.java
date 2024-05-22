@@ -10,6 +10,10 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+
+import javax.swing.*;
+import javax.swing.text.html.ImageView;
 
 public class GameController {
 
@@ -75,9 +79,12 @@ public class GameController {
     ArrayList<Double> rotateCoordinatesX = new ArrayList<>();
     ArrayList<Double> rotateCoordinatesY = new ArrayList<>();
     int[] numberOfRotate = new int[snakeLength];
-    int[] armortail = {10, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    int[] armortail = {10, 10, 10, 1, 1, 1, 1, 1, 1, 1, 1};
 
-    int scoreofarmor = 0;
+    int aimcontrol = 10;
+    int startarmor;
+    boolean buttonwasdelete = false;
+
 
     Random random = new Random();
 
@@ -148,8 +155,7 @@ public class GameController {
         {
             public void run()
             {
-        if (visibleSnake <= 5) {
-            if (random.nextFloat(1) < 0.995) {
+            if (random.nextFloat(1) < 0.998) {
                 coordinatesOfDefX = random.nextInt(600) + 50;
                 coordinatesOfDefY = random.nextInt(600) + 50;
                 for (int i = 0; i <= snakeLength - 1; i++) {
@@ -166,9 +172,6 @@ public class GameController {
                 armorButton.setLayoutX(coordinatesOfDefX);
                 armorButton.setLayoutY(coordinatesOfDefY);
             }
-        } else {
-            armorButton.setVisible(false);
-        }
                 try {
                     Thread.sleep(10);
                 } catch (InterruptedException e) {
@@ -248,18 +251,14 @@ public class GameController {
 
     public boolean isFlagforarmor() {
         if (snakeHead.getLayoutX() < armorButton.getLayoutX() + armorButton.getWidth() && snakeHead.getLayoutX() > armorButton.getLayoutX() && snakeHead.getLayoutY() > armorButton.getLayoutY() && snakeHead.getLayoutY() < armorButton.getLayoutY() + armorButton.getHeight()) {
-            System.out.println("был");
             return true;
 
         } else if (snakeHead.getLayoutX() + snakeHead.getWidth() < armorButton.getLayoutX() + armorButton.getWidth() && snakeHead.getLayoutX() + snakeHead.getWidth() > armorButton.getLayoutX() && snakeHead.getLayoutY() > armorButton.getLayoutY() && snakeHead.getLayoutY() < armorButton.getLayoutY() + armorButton.getHeight()) {
-            System.out.println("был");
             return true;
 
         } else if(snakeHead.getLayoutX() < armorButton.getLayoutX() + armorButton.getWidth() && snakeHead.getLayoutX() > armorButton.getLayoutX() && snakeHead.getLayoutY() + snakeHead.getHeight() > armorButton.getLayoutY() && snakeHead.getLayoutY() + snakeHead.getHeight() < armorButton.getLayoutY() + armorButton.getHeight()) {
-            System.out.println("был");
             return true;
         } else if(snakeHead.getLayoutX() + snakeHead.getWidth() < armorButton.getLayoutX() + armorButton.getWidth() && snakeHead.getLayoutX() + snakeHead.getWidth() > armorButton.getLayoutX() && snakeHead.getLayoutY() + snakeHead.getHeight() > armorButton.getLayoutY() && snakeHead.getLayoutY() + snakeHead.getHeight() < armorButton.getLayoutY() + armorButton.getHeight()) {
-            System.out.println("был");
             return true;
         }
         else {
@@ -268,18 +267,14 @@ public class GameController {
     }
     public boolean isFlagforapple() {
         if (snakeHead.getLayoutX() < appleButton.getLayoutX() + appleButton.getWidth() && snakeHead.getLayoutX() > appleButton.getLayoutX() && snakeHead.getLayoutY() > appleButton.getLayoutY() && snakeHead.getLayoutY() < appleButton.getLayoutY() + appleButton.getHeight()) {
-            System.out.println("был");
             return true;
 
         } else if (snakeHead.getLayoutX() + snakeHead.getWidth() < appleButton.getLayoutX() + appleButton.getWidth() && snakeHead.getLayoutX() + snakeHead.getWidth() > appleButton.getLayoutX() && snakeHead.getLayoutY() > appleButton.getLayoutY() && snakeHead.getLayoutY() < appleButton.getLayoutY() + appleButton.getHeight()) {
-            System.out.println("был");
             return true;
 
         } else if(snakeHead.getLayoutX() < appleButton.getLayoutX() + appleButton.getWidth() && snakeHead.getLayoutX() > appleButton.getLayoutX() && snakeHead.getLayoutY() + snakeHead.getHeight() > appleButton.getLayoutY() && snakeHead.getLayoutY() + snakeHead.getHeight() < appleButton.getLayoutY() + appleButton.getHeight()) {
-            System.out.println("был");
             return true;
         } else if(snakeHead.getLayoutX() + snakeHead.getWidth() < appleButton.getLayoutX() + appleButton.getWidth() && snakeHead.getLayoutX() + snakeHead.getWidth() > appleButton.getLayoutX() && snakeHead.getLayoutY() + snakeHead.getHeight() > appleButton.getLayoutY() && snakeHead.getLayoutY() + snakeHead.getHeight() < appleButton.getLayoutY() + appleButton.getHeight()) {
-            System.out.println("был");
             return true;
         }
         else {
@@ -295,9 +290,6 @@ public class GameController {
         if (visibleSnake < 10){
             snake[visibleSnake].setVisible(true);
             visibleSnake+=1;
-            if(appleButton.isVisible()){
-                appleButton.setVisible(false);
-            }
         }
         else{
             System.out.println("ПОБЕДА!!!!!!!!!");
@@ -332,10 +324,9 @@ public class GameController {
     }
 
     private void snakeArmor() {
-        scoreofarmor += 1;
         for(int i = 0; i < visibleSnake; i++) {
                 armortail[i] += 1;
-                System.out.println("Броня для тела" + " " + i + " " + "Увеличена на" + " " + scoreofarmor);
+                System.out.println("Броня для тела" + " " + i + " " + "Увеличена до" + " " + armortail[i]);
         }
     }
 
@@ -436,8 +427,21 @@ public class GameController {
     public void Pressmouse(MouseEvent event) {
                 for (int i = 0; i < snakeLength; i++) {
                     if (event.getSource() == snake[i]) {
-                        ubivat(i);
-                        break;
+                        System.out.println("Попал по телу " + i);
+                        if (i != aimcontrol) {
+                            if (aimcontrol != 10 && armortail[aimcontrol] < startarmor && !(buttonwasdelete)) {
+                                armortail[aimcontrol] = startarmor;
+                                System.out.println("Броня востановлена для тела " + aimcontrol + " до " + startarmor);
+                            }
+                            buttonwasdelete = false;
+                            startarmor = armortail[i];
+                            aimcontrol = i;
+                            ubivat(i);
+                            break;
+                        } else {
+                            ubivat(i);
+                            break;
+                        }
                     }
                 }
     }
@@ -456,6 +460,7 @@ public class GameController {
                 if (armortail[a] == 0) {
                     for (int i = a; i < snakeLength; i++) {
                         if (snake[i].isVisible()) {
+                            buttonwasdelete = true;
                             snakereduce(i);
                         }
                     }
@@ -473,8 +478,6 @@ public class GameController {
         thread.start();
     }
 
-
-
 //    @Override
 //    public String toString(){
 //        for (int i = 0; i < lengthOfArrayList; i++){
@@ -483,35 +486,35 @@ public class GameController {
 //        }
 //        return "";
 //    }
-public void checkSnake(int i){
-    if (speedOfSnakeX[i] == speedOfSnakeX[i-1] && speedOfSnakeX[i] != 0){
-        if (Math.abs(snake[i].getLayoutX() - snake[i-1].getLayoutX()) < 28){
-            if (direction == 'R'){
-                snake[i-1].setLayoutX(snake[i].getLayoutX()+28);
-                //System.out.println("R");
+
+
+
+    public void checkSnake(int i){
+        if (speedOfSnakeX[i] == speedOfSnakeX[i-1] && speedOfSnakeX[i] != 0){
+            if (Math.abs(snake[i].getLayoutX() - snake[i-1].getLayoutX()) < 28){
+                if (direction == 'R'){
+                    snake[i-1].setLayoutX(snake[i].getLayoutX()+28);
+                    //System.out.println("R");
+                }
+                if (direction == 'L'){
+                    snake[i-1].setLayoutX(snake[i].getLayoutX()-28);
+                    //System.out.println("L");
+                }
             }
-            if (direction == 'L'){
-                snake[i-1].setLayoutX(snake[i].getLayoutX()-28);
-                //System.out.println("L");
+        }
+        if (speedOfSnakeY[i] == speedOfSnakeY[i-1] && speedOfSnakeY[i] != 0){
+            if (Math.abs(snake[i].getLayoutY() - snake[i-1].getLayoutY()) < 28){
+                if (direction == 'U'){
+                    snake[i-1].setLayoutY(snake[i].getLayoutY()-28);
+                    //System.out.println("U");
+                }
+                if (direction == 'D'){
+                    snake[i-1].setLayoutY(snake[i].getLayoutY()+28);
+                    //System.out.println("D");
+                }
             }
         }
     }
-    if (speedOfSnakeY[i] == speedOfSnakeY[i-1] && speedOfSnakeY[i] != 0){
-        if (Math.abs(snake[i].getLayoutY() - snake[i-1].getLayoutY()) < 28){
-            if (direction == 'U'){
-                snake[i-1].setLayoutY(snake[i].getLayoutY()-28);
-                //System.out.println("U");
-            }
-            if (direction == 'D'){
-                snake[i-1].setLayoutY(snake[i].getLayoutY()+28);
-                //System.out.println("D");
-            }
-        }
-    }
-}
-
-
-
     public void move(){
         Thread thread = new Thread(new Runnable()
         {
@@ -532,7 +535,10 @@ public void checkSnake(int i){
                             snakeHead.setLayoutY(snakeHead.getLayoutY() + speedOfSnakeY[0]);
                         }
                         else{
+                        checkSnake(i);
+
                             checkSnake(i);
+
                             snake[i].setLayoutX(snake[i].getLayoutX() + speedOfSnakeX[i]);
                             snake[i].setLayoutY(snake[i].getLayoutY() + speedOfSnakeY[i]);
 
