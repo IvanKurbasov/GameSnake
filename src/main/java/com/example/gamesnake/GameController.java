@@ -119,68 +119,41 @@ public class GameController {
     }
 
     public void Apple(){
-        Thread thread = new Thread(new Runnable()
-        {
-            public void run()
-            {
-            coordinatesOfAppleX = random.nextInt(600) + 50;
-            coordinatesOfAppleY = random.nextInt(600) + 50;
-            newApple = true;
+        coordinatesOfAppleX = random.nextInt(600) + 50;
+        coordinatesOfAppleY = random.nextInt(600) + 50;
+        newApple = true;
 
-            for (int i = 0; i <= snakeLength - 1; i++){
-                if (Math.abs(snake[i].getLayoutX() - coordinatesOfAppleX) < 30 || Math.abs(snake[i].getLayoutY() - coordinatesOfAppleY) < 30){
-                    newApple = false;
-                }
-//                if(snake[i].getLayoutX() == coordinatesOfAppleX && snake[i].getLayoutY() == coordinatesOfAppleY) {
-//                    newApple = false;
-//                }
+        for (int i = 0; i <= snakeLength - 1; i++){
+            if (Math.abs(snake[i].getLayoutX() - coordinatesOfAppleX) < 30 || Math.abs(snake[i].getLayoutY() - coordinatesOfAppleY) < 30){
+                newApple = false;
             }
+        }
 
-            if (newApple && (!appleButton.isVisible())){
-                appleButton.setVisible(true);
-                appleButton.setLayoutX(coordinatesOfAppleX);
-                appleButton.setLayoutY(coordinatesOfAppleY);
-            }try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            }
-        });
-        thread.start();
+        if (newApple && (!appleButton.isVisible())){
+            appleButton.setVisible(true);
+            appleButton.setLayoutX(coordinatesOfAppleX);
+            appleButton.setLayoutY(coordinatesOfAppleY);
+        }
     }
 
     public void armorhelp() {
-        Thread thread = new Thread(new Runnable()
-        {
-            public void run()
-            {
-            if (random.nextFloat(1) < 0.998) {
-                coordinatesOfDefX = random.nextInt(600) + 50;
-                coordinatesOfDefY = random.nextInt(600) + 50;
-                for (int i = 0; i <= snakeLength - 1; i++) {
-                    if (Math.abs(snake[i].getLayoutX() - coordinatesOfDefX) < 30 || Math.abs(snake[i].getLayoutY() - coordinatesOfDefY) < 30) {
-                        help = false;
-                        break;
-                    } else {
-                        help = true;
-                    }
+        if (random.nextFloat(1) < 0.998) {
+            coordinatesOfDefX = random.nextInt(600) + 50;
+            coordinatesOfDefY = random.nextInt(600) + 50;
+            for (int i = 0; i <= snakeLength - 1; i++) {
+                if (Math.abs(snake[i].getLayoutX() - coordinatesOfDefX) < 30 || Math.abs(snake[i].getLayoutY() - coordinatesOfDefY) < 30) {
+                    help = false;
+                    break;
+                } else {
+                    help = true;
                 }
             }
-            if (help && (!armorButton.isVisible())) {
-                armorButton.setVisible(true);
-                armorButton.setLayoutX(coordinatesOfDefX);
-                armorButton.setLayoutY(coordinatesOfDefY);
-            }
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        thread.start();
-
+        }
+        if (help && (!armorButton.isVisible())) {
+            armorButton.setVisible(true);
+            armorButton.setLayoutX(coordinatesOfDefX);
+            armorButton.setLayoutY(coordinatesOfDefY);
+        }
     }
 
 
@@ -188,10 +161,7 @@ public class GameController {
 
 
     public void checkCollisionOfSnakeHeadAndApple() {
-        Thread thread = new Thread(new Runnable()
-        {
-            public void run()
-            {
+
         if (appleButton.isVisible() && isFlagforapple()){
 //            double maxX = Math.max(snakeHead.getLayoutX(), appleButton.getLayoutX());
 //            double maxY = Math.max(snakeHead.getLayoutY(), appleButton.getLayoutY());
@@ -205,23 +175,9 @@ public class GameController {
             coordinatesOfAppleX = 0;
             snakeGrowth();
             }
-            else{
-                return;
-            }try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            }
-        });
-        thread.start();
-        }
+    }
 
     public void checkCollisionOfSnakeHeadAndarmorButton() {
-        Thread thread = new Thread(new Runnable()
-        {
-            public void run()
-            {
         if (armorButton.isVisible() && isFlagforarmor()) {
             System.out.println(armorButton.getLayoutX());
             System.out.println(armorButton.getLayoutY());
@@ -236,18 +192,8 @@ public class GameController {
             coordinatesOfDefY = 0;
             snakeArmor();
         }
-            else {
-                return;
-            }
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        thread.start();
-        }
+
+    }
 
     public boolean isFlagforarmor() {
         if (snakeHead.getLayoutX() < armorButton.getLayoutX() + armorButton.getWidth() && snakeHead.getLayoutX() > armorButton.getLayoutX() && snakeHead.getLayoutY() > armorButton.getLayoutY() && snakeHead.getLayoutY() < armorButton.getLayoutY() + armorButton.getHeight()) {
@@ -283,10 +229,6 @@ public class GameController {
     }
 
     public void snakeGrowth(){
-        Thread thread = new Thread(new Runnable()
-        {
-            public void run()
-            {
         if (visibleSnake < 10){
             snake[visibleSnake].setVisible(true);
             visibleSnake+=1;
@@ -294,39 +236,18 @@ public class GameController {
         else{
             System.out.println("ПОБЕДА!!!!!!!!!");
         }
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        thread.start();
     }
 
     public void snakereduce(int a){
-        Thread thread = new Thread(new Runnable()
-        {
-            public void run()
-            {
-
         snake[a].setVisible(false);
         visibleSnake -= 1;
         armortail[a] += 1;
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        thread.start();
     }
 
     private void snakeArmor() {
         for(int i = 0; i < visibleSnake; i++) {
-                armortail[i] += 1;
-                System.out.println("Броня для тела" + " " + i + " " + "Увеличена до" + " " + armortail[i]);
+            armortail[i] += 1;
+            System.out.println("Броня для тела" + " " + i + " " + "Увеличена до" + " " + armortail[i]);
         }
     }
 
@@ -425,57 +346,45 @@ public class GameController {
 
     @FXML
     public void Pressmouse(MouseEvent event) {
-                for (int i = 0; i < snakeLength; i++) {
-                    if (event.getSource() == snake[i]) {
-                        System.out.println("Попал по телу " + i);
-                        if (i != aimcontrol) {
-                            if (aimcontrol != 10 && armortail[aimcontrol] < startarmor && !(buttonwasdelete)) {
-                                armortail[aimcontrol] = startarmor;
-                                System.out.println("Броня востановлена для тела " + aimcontrol + " до " + startarmor);
-                            }
-                            buttonwasdelete = false;
-                            startarmor = armortail[i];
-                            aimcontrol = i;
-                            ubivat(i);
-                            break;
-                        } else {
-                            ubivat(i);
-                            break;
-                        }
+        for (int i = 0; i < snakeLength; i++) {
+            if (event.getSource() == snake[i]) {
+                System.out.println("Попал по телу " + i);
+                if (i != aimcontrol) {
+                    if (aimcontrol != 10 && armortail[aimcontrol] < startarmor && !(buttonwasdelete)) {
+                        armortail[aimcontrol] = startarmor;
+                        System.out.println("Броня востановлена для тела " + aimcontrol + " до " + startarmor);
                     }
+                    buttonwasdelete = false;
+                    startarmor = armortail[i];
+                    aimcontrol = i;
+                    ubivat(i);
+                    break;
+                } else {
+                    ubivat(i);
+                    break;
                 }
+            }
+        }
     }
 
 
 
     public void ubivat(int a) {
-        Thread thread = new Thread(new Runnable()
-        {
-            public void run()
-            {
-                if (!snake[a].isVisible()) {
-                    return;
-                }
-                armortail[a] -= 1;
-                if (armortail[a] == 0) {
-                    for (int i = a; i < snakeLength; i++) {
-                        if (snake[i].isVisible()) {
-                            buttonwasdelete = true;
-                            snakereduce(i);
-                        }
-                    }
-                }
-                if(visibleSnake < 3) {
-                    System.out.println("Проиграл!!!!!!!!");
-                }
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+        if (!snake[a].isVisible()) {
+            return;
+        }
+        armortail[a] -= 1;
+        if (armortail[a] == 0) {
+            for (int i = a; i < snakeLength; i++) {
+                if (snake[i].isVisible()) {
+                    buttonwasdelete = true;
+                    snakereduce(i);
                 }
             }
-        });
-        thread.start();
+        }
+        if(visibleSnake < 3) {
+            System.out.println("Проиграл!!!!!!!!");
+        }
     }
 
 //    @Override
