@@ -1,16 +1,27 @@
 package com.example.gamesnake;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import javax.swing.*;
 import javax.swing.text.html.ImageView;
@@ -19,6 +30,7 @@ public class GameController {
 
     public javafx.scene.image.ImageView appleImage;
     public javafx.scene.image.ImageView armorImage;
+    public javafx.scene.image.ImageView GameOverImage;
 
     @FXML
     private ResourceBundle resources;
@@ -60,11 +72,14 @@ public class GameController {
     private Button appleButton;
     @FXML
     private Button armorButton;
-
-    private Button newTail = new Button();
+    @FXML
+    private Button anotherGameButton;
+    @FXML
+    private Button toMenuButton;
     double speed = 2;
     boolean newApple = false;
     boolean help = false;
+    boolean finish = false;
     char direction = 'U';
     int snakeLength = 10;
     int visibleSnake = 3;
@@ -80,16 +95,14 @@ public class GameController {
     ArrayList<Double> rotateCoordinatesY = new ArrayList<>();
     int[] numberOfRotate = new int[snakeLength];
     int[] armortail = {10, 10, 10, 1, 1, 1, 1, 1, 1, 1, 1};
-
     int aimcontrol = 10;
     int startarmor;
     boolean buttonwasdelete = false;
-
-
     Random random = new Random();
 
     @FXML
     void initialize() {
+
 
         snake[0] = snakeHead;
         snake[1] = snakeTail1;
@@ -107,6 +120,11 @@ public class GameController {
         }
 
         appleButton.setVisible(false);
+        anotherGameButton.setVisible(false);
+        toMenuButton.setVisible(false);
+        GameOverImage.setVisible(false);
+        anotherGameButton.setText("Играть еще раз");
+        toMenuButton.setText("Меню");
 
         for (int i = 0; i < snakeLength; i++){
             speedOfSnakeX[i] = 0;
@@ -118,7 +136,7 @@ public class GameController {
         move();
     }
 
-    public void Apple(){
+    public void Apple() {
         coordinatesOfAppleX = random.nextInt(600) + 50;
         coordinatesOfAppleY = random.nextInt(600) + 50;
         newApple = true;
@@ -253,7 +271,7 @@ public class GameController {
 
 
     @FXML
-    void OnKeyPressed(KeyEvent event) {
+    void OnKeyPressed(KeyEvent event) throws IOException {
         if ((snakeHead.getLayoutX() == snake[1].getLayoutX())  || (snakeHead.getLayoutY() == snake[1].getLayoutY())){
             if (snake[0].getLayoutX() == snake[1].getLayoutX() || snake[0].getLayoutY() == snake[1].getLayoutY()){
                 if (event.getCode() == KeyCode.W && direction != 'D' && direction != 'U') {
@@ -367,6 +385,21 @@ public class GameController {
         }
     }
 
+    public void gameOver() {
+        if (snakeHead.getLayoutX() <= 0 || snakeHead.getLayoutX() >= 700 - snakeHead.getWidth() || snakeHead.getLayoutY() <= 0 || snakeHead.getLayoutY() >= 700 - snakeHead.getHeight()){
+            finish = true;
+            for (int i = 0; i < visibleSnake; i++){
+                snake[i].setVisible(false);
+            }
+
+            appleButton.setVisible(false);
+            armorButton.setVisible(false);
+            anotherGameButton.setVisible(true);
+            toMenuButton.setVisible(true);
+            GameOverImage.setVisible(true);
+        }
+    }
+
 
 
     public void ubivat(int a) {
@@ -437,6 +470,11 @@ public class GameController {
                     checkCollisionOfSnakeHeadAndApple();
                     checkCollisionOfSnakeHeadAndarmorButton();
 
+                    gameOver();
+
+                    if (finish){
+                        break;
+                    }
 
                     for (int i = snakeLength - 1; i >= 0; i--){
                         if (i == 0){
@@ -444,7 +482,6 @@ public class GameController {
                             snakeHead.setLayoutY(snakeHead.getLayoutY() + speedOfSnakeY[0]);
                         }
                         else{
-                        checkSnake(i);
 
                             checkSnake(i);
 
@@ -475,6 +512,35 @@ public class GameController {
             }
         });
         thread.start();
+    }
+
+
+    @FXML
+    void anotherGameButtonClicked(MouseEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("game.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage newStage = new Stage();
+        Stage lastStage = (Stage) snakeHead.getScene().getWindow();
+        lastStage.close();
+        newStage.initModality(Modality.APPLICATION_MODAL);
+        newStage.setOpacity(1);
+        newStage.setTitle("GameSnake");
+        newStage.setScene(new Scene(root, 700, 700));
+        newStage.show();
+    }
+
+    @FXML
+    void toMenuButtonClicked(MouseEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage newStage = new Stage();
+        Stage lastStage = (Stage) snakeHead.getScene().getWindow();
+        lastStage.close();
+        newStage.initModality(Modality.APPLICATION_MODAL);
+        newStage.setOpacity(1);
+        newStage.setTitle("GameSnake");
+        newStage.setScene(new Scene(root, 700, 700));
+        newStage.show();
     }
 
 }

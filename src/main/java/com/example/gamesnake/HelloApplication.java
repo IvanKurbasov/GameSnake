@@ -11,8 +11,6 @@ import java.beans.EventHandler;
 import java.io.IOException;
 
 public class HelloApplication extends Application {
-    protected boolean finish = false;
-
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));

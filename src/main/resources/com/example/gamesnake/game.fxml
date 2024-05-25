@@ -5,6 +5,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#OnKeyPressed" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gamesnake.GameController">
    <children>
@@ -36,5 +37,18 @@
                </image>
             </ImageView>
          </graphic></Button>
+      <ImageView fx:id="GameOverImage" fitHeight="742.0" fitWidth="700.0" pickOnBounds="true" preserveRatio="true" style="visibility: false;">
+         <image>
+            <Image url="@../../../Images/gameOver.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="toMenuButton" layoutX="100.0" layoutY="500.0" mnemonicParsing="false" onMouseClicked="#toMenuButtonClicked" prefHeight="80.0" prefWidth="150.0" style="-fx-background-color: Transparent;" textFill="#22ff00">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font></Button>
+      <Button fx:id="anotherGameButton" layoutX="350.0" layoutY="500.0" mnemonicParsing="false" onMouseClicked="#anotherGameButtonClicked" prefHeight="80.0" prefWidth="250.0" style="-fx-background-color: transparent;" textFill="#22ff00">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font></Button>
    </children>
 </AnchorPane>

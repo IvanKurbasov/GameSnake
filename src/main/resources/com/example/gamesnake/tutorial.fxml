@@ -12,41 +12,41 @@
    <children>
       <Label prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #90fc23af;" />
       <Button fx:id="snakeHead" layoutX="200.0" layoutY="400.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" />
-      <Button fx:id="snakeTail1" layoutX="200.0" layoutY="428.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" />
-      <Button fx:id="snakeTail2" layoutX="200.0" layoutY="456.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" />
-      <Button fx:id="snakeTail3" layoutX="200.0" layoutY="484.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" />
-      <Button fx:id="snakeTail4" layoutX="200.0" layoutY="512.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" />
-      <Button fx:id="snakeTail5" layoutX="200.0" layoutY="540.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" />
-      <Button fx:id="snakeTail6" layoutX="200.0" layoutY="568.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" />
-      <Button fx:id="snakeTail7" layoutX="200.0" layoutY="596.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" />
-      <Button fx:id="snakeTail8" layoutX="200.0" layoutY="624.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" />
-      <Button fx:id="snakeTail9" layoutX="200.0" layoutY="652.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" />
-      <Text fx:id="text1" layoutX="120.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="488.5367126464844">
+      <Button fx:id="snakeTail1" layoutX="200.0" layoutY="428.0" mnemonicParsing="false" onMousePressed="#Pressmouse" prefHeight="28.0" prefWidth="28.0" />
+      <Button fx:id="snakeTail2" layoutX="200.0" layoutY="456.0" mnemonicParsing="false" onMousePressed="#Pressmouse" prefHeight="28.0" prefWidth="28.0" />
+      <Button fx:id="snakeTail3" layoutX="200.0" layoutY="484.0" mnemonicParsing="false" onMousePressed="#Pressmouse" prefHeight="28.0" prefWidth="28.0" />
+      <Button fx:id="snakeTail4" layoutX="200.0" layoutY="512.0" mnemonicParsing="false" onMousePressed="#Pressmouse" prefHeight="28.0" prefWidth="28.0" />
+      <Button fx:id="snakeTail5" layoutX="200.0" layoutY="540.0" mnemonicParsing="false" onMousePressed="#Pressmouse" prefHeight="28.0" prefWidth="28.0" />
+      <Button fx:id="snakeTail6" layoutX="200.0" layoutY="568.0" mnemonicParsing="false" onMousePressed="#Pressmouse" prefHeight="28.0" prefWidth="28.0" />
+      <Button fx:id="snakeTail7" layoutX="200.0" layoutY="596.0" mnemonicParsing="false" onMousePressed="#Pressmouse" prefHeight="28.0" prefWidth="28.0" />
+      <Button fx:id="snakeTail8" layoutX="200.0" layoutY="624.0" mnemonicParsing="false" onMousePressed="#Pressmouse" prefHeight="28.0" prefWidth="28.0" />
+      <Button fx:id="snakeTail9" layoutX="200.0" layoutY="652.0" mnemonicParsing="false" onMousePressed="#Pressmouse" prefHeight="28.0" prefWidth="28.0" />
+      <Text fx:id="text1" layoutX="50.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="600.0">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text fx:id="text2" layoutX="120.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="488.5367126464844">
+      <Text fx:id="text2" layoutX="50.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="600.0">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text fx:id="text3" layoutX="120.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="516.5366821289062">
+      <Text fx:id="text3" layoutX="50.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="600.0">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text fx:id="text4" layoutX="120.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="516.5366821289062">
+      <Text fx:id="text4" layoutX="50.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="600.0">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text fx:id="text5" layoutX="90.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="550.1367797851562">
+      <Text fx:id="text5" layoutX="50.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="600.0">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text fx:id="text6" layoutX="90.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="550.1367797851562">
+      <Text fx:id="text6" layoutX="50.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="600.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -64,6 +64,15 @@
          <font>
             <Font size="24.0" />
          </font>
+      </Button>
+      <Button fx:id="armorButton" layoutX="650.0" layoutY="12.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="25.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="armorImage" fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Images/pngwing.com.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Button>
    </children>
 </AnchorPane>

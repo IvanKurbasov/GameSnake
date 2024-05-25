@@ -21,13 +21,19 @@ import java.util.Random;
 
 public class TutorialController extends HelloApplication{
     public javafx.scene.image.ImageView appleImage;
+    public javafx.scene.image.ImageView armorImage;
     boolean newApple = false;
+    boolean help = false;
     int coordinatesOfAppleX = 0;
     int coordinatesOfAppleY = 0;
+    int coordinatesOfDefX = 0;
+    int coordinatesOfDefY = 0;
     Random random = new Random();
     int visibleSnake = 3;
     @FXML
     private Button appleButton;
+    @FXML
+    private Button armorButton;
     @FXML
     private AnchorPane pane;
     @FXML
@@ -77,30 +83,36 @@ public class TutorialController extends HelloApplication{
     int lengthOfArrayList = 0;
     char direction = 'U';
     private int speed = 2;
-    private int stage = 1;
     private int currentStage = 1;
     private int wPressed = 0;
     private int sPressed = 0;
     private int aPressed = 0;
     private int dPressed = 0;
     boolean startStage2 = true;
+    boolean startStage3 = true;
+    boolean startStage4 = true;
     boolean needToCreateApple = false;
+    boolean finish = false;
     Button[] snake = new Button[snakeLength];
     double[] speedOfSnakeX = new double[snakeLength];
     double[] speedOfSnakeY = new double[snakeLength];
     ArrayList<Double> rotateCoordinatesX = new ArrayList<>();
     ArrayList<Double> rotateCoordinatesY = new ArrayList<>();
     int[] numberOfRotate = new int[snakeLength];
+    int[] armortail = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    int aimcontrol = 10;
+    int startarmor;
+    boolean buttonwasdelete = false;
 
     @FXML
     void initialize() {
 
-        text1.setText("                                        Привет!");
-        text2.setText("                  Давай научимся играть в эту игру!");
-        text3.setText("Для управления змейкой нажимайте на клавиатуру:");
-        text4.setText("           W - вверх, S - вниз, A - влево, D - вправо");
-        text5.setText("Если змейка движется вверх, то нельзя нажимать кнопку 'вниз'");
-        text6.setText("Если змейка движется влево, то нельзя нажимать кнопку 'вправо'");
+        text1.setText("                                                        Привет!");
+        text2.setText("                               Давай научимся играть в эту игру!");
+        text3.setText("                 Для управления змейкой нажимайте на клавиатуру:");
+        text4.setText("                        W - вверх, S - вниз, A - влево, D - вправо");
+        text5.setText("        Если змейка движется вверх, то нельзя нажимать кнопку 'вниз'");
+        text6.setText("        Если змейка движется влево, то нельзя нажимать кнопку 'вправо'");
 
         snake[0] = snakeHead;
         snake[1] = snakeTail1;
@@ -118,6 +130,7 @@ public class TutorialController extends HelloApplication{
         }
 
         appleButton.setVisible(false);
+        armorButton.setVisible(false);
 
         for (int i = 0; i < snakeLength; i++){
             speedOfSnakeX[i] = 0;
@@ -131,7 +144,7 @@ public class TutorialController extends HelloApplication{
     }
 
     public void Stage2(){
-        text1.setText("Чтобы расти, змейке нужно кушать яблочки");
+        text1.setText("                       Чтобы расти, змейке нужно кушать яблочки");
         text2.setText("Каждый раз, когда она ест яблоко, она увеличивается в размере на 1");
         text3.setText("");
         text4.setText("");
@@ -140,7 +153,102 @@ public class TutorialController extends HelloApplication{
         needToCreateApple = true;
     }
 
+    public void Stage3(){
+        text1.setText("      Игрок, управляющей мышкой, должен пытаться убить змейку");
+        text2.setText("Каждый раз, когда он нажмет на хвост змеи, его жизни уменьшатся");
+        text3.setText("Если жизни опустятся до 0, весь хвост ниже уничтоженной кнопки тоже");
+        text4.setText("исчезнет. Нажимайте на хвост змейки, чтобы уничтожить его. Учтите,");
+        text5.setText("что каждый хвост имеет свои жизни. Если нажать на другой хвост, то");
+        text6.setText("жизни первого полностью востановятся. Попробуйте убить змейку!");
+    }
 
+    public void Stage4() {
+        text1.setText("На поле будут появляться щиты. Они создают броню для хвоста. Это");
+        text2.setText("повысит выживаемость змейки. Старайтесь собирать щиты как можно");
+        text3.setText("быстрее. Совет: двигайтесь очень странно, извилисто и");
+        text4.setText("непредсказуемо, чтобы вас было тяжелее уничтожить");
+        text5.setText("");
+        text6.setText("");
+    }
+
+    public void armorhelp() {
+        if (random.nextFloat(1) < 0.998) {
+            coordinatesOfDefX = random.nextInt(600) + 50;
+            coordinatesOfDefY = random.nextInt(450) + 50;
+            for (int i = 0; i <= snakeLength - 1; i++) {
+                if (Math.abs(snake[i].getLayoutX() - coordinatesOfDefX) < 30 || Math.abs(snake[i].getLayoutY() - coordinatesOfDefY) < 30) {
+                    help = false;
+                    break;
+                } else {
+                    help = true;
+                }
+            }
+        }
+        if (help && (!armorButton.isVisible())) {
+            armorButton.setVisible(true);
+            armorButton.setLayoutX(coordinatesOfDefX);
+            armorButton.setLayoutY(coordinatesOfDefY);
+        }
+    }
+
+    private void snakeArmor() {
+        for(int i = 0; i < visibleSnake; i++) {
+            armortail[i] += 1;
+            System.out.println("Броня для тела" + " " + i + " " + "Увеличена до" + " " + armortail[i]);
+        }
+    }
+    @FXML
+    void Pressmouse(MouseEvent event) {
+        if (currentStage >= 3) {
+            for (int i = 0; i < snakeLength; i++) {
+                if (event.getSource() == snake[i]) {
+                    System.out.println("Попал по телу " + i);
+                    if (i != aimcontrol) {
+                        if (aimcontrol != 10 && armortail[aimcontrol] < startarmor && !(buttonwasdelete)) {
+                            armortail[aimcontrol] = startarmor;
+                            System.out.println("Броня востановлена для тела " + aimcontrol + " до " + startarmor);
+                        }
+                        buttonwasdelete = false;
+                        startarmor = armortail[i];
+                        aimcontrol = i;
+                        ubivat(i);
+                        break;
+                    } else {
+                        ubivat(i);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    public void ubivat(int a) {
+        if (currentStage >= 3) {
+            if (!snake[a].isVisible()) {
+                return;
+            }
+            armortail[a] -= 1;
+            if (armortail[a] == 0) {
+                for (int i = a; i < snakeLength; i++) {
+                    if (snake[i].isVisible()) {
+                        buttonwasdelete = true;
+                        snakereduce(i);
+                    }
+                }
+            }
+            if (visibleSnake < 3) {
+                System.out.println("Проиграл!!!!!!!!");
+            }
+        }
+    }
+
+    public void snakereduce(int a) {
+        if (currentStage >= 3) {
+            snake[a].setVisible(false);
+            visibleSnake -= 1;
+            armortail[a] += 1;
+        }
+    }
 
     public void Apple(){
         if (random.nextFloat(1) < 0.995){
@@ -177,6 +285,39 @@ public class TutorialController extends HelloApplication{
                 coordinatesOfAppleX = 0;
                 snakeGrowth();
             }
+        }
+    }
+    public void checkCollisionOfSnakeHeadAndarmorButton() {
+        if (armorButton.isVisible() && isFlagforarmor()) {
+            System.out.println(armorButton.getLayoutX());
+            System.out.println(armorButton.getLayoutY());
+            armorButton.setVisible(false);
+            if(!armorButton.isVisible()) {
+                System.out.println("Невидима");
+                System.out.println(armorButton.isVisible());
+                System.out.println(armorButton.getLayoutX());
+                System.out.println(armorButton.getLayoutY());
+            }
+            coordinatesOfDefX = 0;
+            coordinatesOfDefY = 0;
+            snakeArmor();
+        }
+
+    }
+    public boolean isFlagforarmor() {
+        if (snakeHead.getLayoutX() < armorButton.getLayoutX() + armorButton.getWidth() && snakeHead.getLayoutX() > armorButton.getLayoutX() && snakeHead.getLayoutY() > armorButton.getLayoutY() && snakeHead.getLayoutY() < armorButton.getLayoutY() + armorButton.getHeight()) {
+            return true;
+
+        } else if (snakeHead.getLayoutX() + snakeHead.getWidth() < armorButton.getLayoutX() + armorButton.getWidth() && snakeHead.getLayoutX() + snakeHead.getWidth() > armorButton.getLayoutX() && snakeHead.getLayoutY() > armorButton.getLayoutY() && snakeHead.getLayoutY() < armorButton.getLayoutY() + armorButton.getHeight()) {
+            return true;
+
+        } else if(snakeHead.getLayoutX() < armorButton.getLayoutX() + armorButton.getWidth() && snakeHead.getLayoutX() > armorButton.getLayoutX() && snakeHead.getLayoutY() + snakeHead.getHeight() > armorButton.getLayoutY() && snakeHead.getLayoutY() + snakeHead.getHeight() < armorButton.getLayoutY() + armorButton.getHeight()) {
+            return true;
+        } else if(snakeHead.getLayoutX() + snakeHead.getWidth() < armorButton.getLayoutX() + armorButton.getWidth() && snakeHead.getLayoutX() + snakeHead.getWidth() > armorButton.getLayoutX() && snakeHead.getLayoutY() + snakeHead.getHeight() > armorButton.getLayoutY() && snakeHead.getLayoutY() + snakeHead.getHeight() < armorButton.getLayoutY() + armorButton.getHeight()) {
+            return true;
+        }
+        else {
+            return false;
         }
     }
 
@@ -325,11 +466,39 @@ public class TutorialController extends HelloApplication{
                     Apple();
                 }
 
+                if (currentStage >= 4){
+                    armorhelp();
+                    checkCollisionOfSnakeHeadAndarmorButton();
+                }
+
                 checkCollisionOfSnakeHeadAndApple();
 
                 if (wPressed >= 2 && sPressed >= 2 && aPressed >= 2 && dPressed >= 2 && startStage2){
+                    currentStage = 2;
                     Stage2();
                     startStage2 = false;
+                }
+
+                if (visibleSnake == 4 && startStage3){
+                    speed = speed / 2;
+                    for (int i = 0; i < snakeLength; i++){
+                        speedOfSnakeX[i] = speedOfSnakeX[i] / 2;
+                        speedOfSnakeY[i] = speedOfSnakeY[i] / 2;
+                    }
+                    currentStage = 3;
+                    Stage3();
+                    startStage3 = false;
+                }
+
+                if (visibleSnake == 1 && currentStage == 3 && startStage4){
+                    currentStage = 4;
+                    speed = speed * 2;
+                    for (int i = 0; i < snakeLength; i++){
+                        speedOfSnakeX[i] = speedOfSnakeX[i] * 2;
+                        speedOfSnakeY[i] = speedOfSnakeY[i] * 2;
+                    }
+                    Stage4();
+                    startStage4 = false;
                 }
 
                 for (int i = snakeLength - 1; i >= 0; i--){
