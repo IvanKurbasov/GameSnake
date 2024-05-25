@@ -94,7 +94,7 @@ public class GameController {
     ArrayList<Double> rotateCoordinatesX = new ArrayList<>();
     ArrayList<Double> rotateCoordinatesY = new ArrayList<>();
     int[] numberOfRotate = new int[snakeLength];
-    int[] armortail = {10, 10, 10, 1, 1, 1, 1, 1, 1, 1, 1};
+    int[] armortail = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
     int aimcontrol = 10;
     int startarmor;
     boolean buttonwasdelete = false;
@@ -181,13 +181,6 @@ public class GameController {
     public void checkCollisionOfSnakeHeadAndApple() {
 
         if (appleButton.isVisible() && isFlagforapple()){
-//            double maxX = Math.max(snakeHead.getLayoutX(), appleButton.getLayoutX());
-//            double maxY = Math.max(snakeHead.getLayoutY(), appleButton.getLayoutY());
-//            double minX = Math.min(snakeHead.getLayoutX() + snakeHead.getWidth(), appleButton.getLayoutX() + appleButton.getWidth());
-//            double minY = Math.min(snakeHead.getLayoutY() + snakeHead.getHeight(), appleButton.getLayoutY() + appleButton.getHeight());
-//            if (maxX >= minX - 10 || maxY >= minY - 10){
-//                int a = 0;
-//            }
             appleButton.setVisible(false);
             coordinatesOfAppleY = 0;
             coordinatesOfAppleX = 0;
@@ -200,12 +193,6 @@ public class GameController {
             System.out.println(armorButton.getLayoutX());
             System.out.println(armorButton.getLayoutY());
             armorButton.setVisible(false);
-            if(!armorButton.isVisible()) {
-                System.out.println("Невидима");
-                System.out.println(armorButton.isVisible());
-                System.out.println(armorButton.getLayoutX());
-                System.out.println(armorButton.getLayoutY());
-            }
             coordinatesOfDefX = 0;
             coordinatesOfDefY = 0;
             snakeArmor();
@@ -251,9 +238,6 @@ public class GameController {
             snake[visibleSnake].setVisible(true);
             visibleSnake+=1;
         }
-        else{
-            System.out.println("ПОБЕДА!!!!!!!!!");
-        }
     }
 
     public void snakereduce(int a){
@@ -265,7 +249,6 @@ public class GameController {
     private void snakeArmor() {
         for(int i = 0; i < visibleSnake; i++) {
             armortail[i] += 1;
-            System.out.println("Броня для тела" + " " + i + " " + "Увеличена до" + " " + armortail[i]);
         }
     }
 
@@ -366,11 +349,9 @@ public class GameController {
     public void Pressmouse(MouseEvent event) {
         for (int i = 0; i < snakeLength; i++) {
             if (event.getSource() == snake[i]) {
-                System.out.println("Попал по телу " + i);
                 if (i != aimcontrol) {
                     if (aimcontrol != 10 && armortail[aimcontrol] < startarmor && !(buttonwasdelete)) {
                         armortail[aimcontrol] = startarmor;
-                        System.out.println("Броня востановлена для тела " + aimcontrol + " до " + startarmor);
                     }
                     buttonwasdelete = false;
                     startarmor = armortail[i];
@@ -386,7 +367,7 @@ public class GameController {
     }
 
     public void gameOver() {
-        if (snakeHead.getLayoutX() <= 0 || snakeHead.getLayoutX() >= 700 - snakeHead.getWidth() || snakeHead.getLayoutY() <= 0 || snakeHead.getLayoutY() >= 700 - snakeHead.getHeight()){
+        if (snakeHead.getLayoutX() <= 0 || snakeHead.getLayoutX() >= 700 - snakeHead.getWidth() || snakeHead.getLayoutY() <= 0 || snakeHead.getLayoutY() >= 700 - snakeHead.getHeight() || visibleSnake == 1){
             finish = true;
             for (int i = 0; i < visibleSnake; i++){
                 snake[i].setVisible(false);
@@ -414,9 +395,6 @@ public class GameController {
                     snakereduce(i);
                 }
             }
-        }
-        if(visibleSnake < 3) {
-            System.out.println("Проиграл!!!!!!!!");
         }
     }
 

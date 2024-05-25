@@ -22,6 +22,7 @@ import java.util.Random;
 public class TutorialController extends HelloApplication{
     public javafx.scene.image.ImageView appleImage;
     public javafx.scene.image.ImageView armorImage;
+    public javafx.scene.image.ImageView GameOverImage;
     boolean newApple = false;
     boolean help = false;
     int coordinatesOfAppleX = 0;
@@ -51,6 +52,8 @@ public class TutorialController extends HelloApplication{
     @FXML
     private Text text6;
     @FXML
+    private Text text7;
+    @FXML
     private Button snakeHead;
 
     @FXML
@@ -79,6 +82,8 @@ public class TutorialController extends HelloApplication{
 
     @FXML
     private Button snakeTail9;
+    @FXML
+    private Button toMenuButtonAfterTutorial;
     private int snakeLength = 10;
     int lengthOfArrayList = 0;
     char direction = 'U';
@@ -88,9 +93,11 @@ public class TutorialController extends HelloApplication{
     private int sPressed = 0;
     private int aPressed = 0;
     private int dPressed = 0;
+    private int armorGet = 0;
     boolean startStage2 = true;
     boolean startStage3 = true;
     boolean startStage4 = true;
+    boolean startStage5 = true;
     boolean needToCreateApple = false;
     boolean finish = false;
     Button[] snake = new Button[snakeLength];
@@ -131,6 +138,8 @@ public class TutorialController extends HelloApplication{
 
         appleButton.setVisible(false);
         armorButton.setVisible(false);
+        toMenuButtonAfterTutorial.setText("Меню");
+        toMenuButtonAfterTutorial.setVisible(false);
 
         for (int i = 0; i < snakeLength; i++){
             speedOfSnakeX[i] = 0;
@@ -163,6 +172,9 @@ public class TutorialController extends HelloApplication{
     }
 
     public void Stage4() {
+        snake[1].setVisible(true);
+        snake[2].setVisible(true);
+        visibleSnake = 3;
         text1.setText("На поле будут появляться щиты. Они создают броню для хвоста. Это");
         text2.setText("повысит выживаемость змейки. Старайтесь собирать щиты как можно");
         text3.setText("быстрее. Совет: двигайтесь очень странно, извилисто и");
@@ -171,10 +183,19 @@ public class TutorialController extends HelloApplication{
         text6.setText("");
     }
 
+    public void Stage5(){
+        text1.setText("Если вы, управляя змейкой, коснетесь границ поля или ваша длина");
+        text2.setText("станет равна 1, вы проиграете. Попробуйте специально врезаться в");
+        text3.setText("край или дождитесь, пока мышка уничтожит вас");
+        text4.setText("");
+        text5.setText("");
+        text6.setText("");
+    }
+
     public void armorhelp() {
         if (random.nextFloat(1) < 0.998) {
             coordinatesOfDefX = random.nextInt(600) + 50;
-            coordinatesOfDefY = random.nextInt(450) + 50;
+            coordinatesOfDefY = random.nextInt(400) + 150;
             for (int i = 0; i <= snakeLength - 1; i++) {
                 if (Math.abs(snake[i].getLayoutX() - coordinatesOfDefX) < 30 || Math.abs(snake[i].getLayoutY() - coordinatesOfDefY) < 30) {
                     help = false;
@@ -194,7 +215,6 @@ public class TutorialController extends HelloApplication{
     private void snakeArmor() {
         for(int i = 0; i < visibleSnake; i++) {
             armortail[i] += 1;
-            System.out.println("Броня для тела" + " " + i + " " + "Увеличена до" + " " + armortail[i]);
         }
     }
     @FXML
@@ -202,11 +222,9 @@ public class TutorialController extends HelloApplication{
         if (currentStage >= 3) {
             for (int i = 0; i < snakeLength; i++) {
                 if (event.getSource() == snake[i]) {
-                    System.out.println("Попал по телу " + i);
                     if (i != aimcontrol) {
                         if (aimcontrol != 10 && armortail[aimcontrol] < startarmor && !(buttonwasdelete)) {
                             armortail[aimcontrol] = startarmor;
-                            System.out.println("Броня востановлена для тела " + aimcontrol + " до " + startarmor);
                         }
                         buttonwasdelete = false;
                         startarmor = armortail[i];
@@ -218,6 +236,24 @@ public class TutorialController extends HelloApplication{
                         break;
                     }
                 }
+            }
+        }
+    }
+
+    public void gameOver() {
+        if (currentStage == 5) {
+            if (snakeHead.getLayoutX() <= 0 || snakeHead.getLayoutX() >= 700 - snakeHead.getWidth() || snakeHead.getLayoutY() <= 0 || snakeHead.getLayoutY() >= 700 - snakeHead.getHeight() || visibleSnake == 1) {
+                finish = true;
+                for (int i = 0; i < visibleSnake; i++) {
+                    snake[i].setVisible(false);
+                }
+
+                appleButton.setVisible(false);
+                armorButton.setVisible(false);
+                GameOverImage.setVisible(true);
+                toMenuButtonAfterTutorial.setVisible(true);
+                text7.setText("Поздравляю, вы прошли обучение! Теперь вы готовы к настоящей игре!");
+
             }
         }
     }
@@ -237,7 +273,6 @@ public class TutorialController extends HelloApplication{
                 }
             }
             if (visibleSnake < 3) {
-                System.out.println("Проиграл!!!!!!!!");
             }
         }
     }
@@ -289,15 +324,8 @@ public class TutorialController extends HelloApplication{
     }
     public void checkCollisionOfSnakeHeadAndarmorButton() {
         if (armorButton.isVisible() && isFlagforarmor()) {
-            System.out.println(armorButton.getLayoutX());
-            System.out.println(armorButton.getLayoutY());
             armorButton.setVisible(false);
-            if(!armorButton.isVisible()) {
-                System.out.println("Невидима");
-                System.out.println(armorButton.isVisible());
-                System.out.println(armorButton.getLayoutX());
-                System.out.println(armorButton.getLayoutY());
-            }
+            armorGet += 1;
             coordinatesOfDefX = 0;
             coordinatesOfDefY = 0;
             snakeArmor();
@@ -327,7 +355,6 @@ public class TutorialController extends HelloApplication{
             visibleSnake+=1;
         }
         else{
-            System.out.println("ПОБЕДА!!!!!!!!!");
         }
     }
 
@@ -479,7 +506,7 @@ public class TutorialController extends HelloApplication{
                     startStage2 = false;
                 }
 
-                if (visibleSnake == 4 && startStage3){
+                if (visibleSnake == 7 && startStage3){
                     speed = speed / 2;
                     for (int i = 0; i < snakeLength; i++){
                         speedOfSnakeX[i] = speedOfSnakeX[i] / 2;
@@ -500,6 +527,14 @@ public class TutorialController extends HelloApplication{
                     Stage4();
                     startStage4 = false;
                 }
+
+                if (armorGet >= 3 && startStage5){
+                    currentStage = 5;
+                    Stage5();
+                    startStage5 = false;
+                }
+
+                gameOver();
 
                 for (int i = snakeLength - 1; i >= 0; i--){
                     if (i == 0){
@@ -540,6 +575,21 @@ public class TutorialController extends HelloApplication{
 
     @FXML
     void ToMenuButtonClicked(MouseEvent event) throws IOException {
+        finish = true;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage newStage = new Stage();
+        Stage lastStage = (Stage) ToMenuButton.getScene().getWindow();
+        lastStage.close();
+        newStage.initModality(Modality.APPLICATION_MODAL);
+        newStage.setOpacity(1);
+        newStage.setTitle("GameSnake");
+        newStage.setScene(new Scene(root, 700, 700));
+        newStage.show();
+    }
+
+    @FXML
+    void toMenuButtonAfterTutorialClicked(MouseEvent event) throws IOException {
         finish = true;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
         Parent root = fxmlLoader.load();
