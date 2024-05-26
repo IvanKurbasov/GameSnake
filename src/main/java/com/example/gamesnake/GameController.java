@@ -1,30 +1,23 @@
 package com.example.gamesnake;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.*;
-
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
-import javax.swing.*;
-import javax.swing.text.html.ImageView;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.ResourceBundle;
 
 public class GameController {
 
@@ -36,11 +29,6 @@ public class GameController {
     @FXML
     private ResourceBundle resources;
 
-    @FXML
-    private URL location;
-
-    @FXML
-    private Label Label;
     @FXML
     private Button snakeHead;
     @FXML
@@ -67,8 +55,6 @@ public class GameController {
 
     @FXML
     private Button snakeTail9;
-    @FXML
-    private AnchorPane pane;
     @FXML
     private Button appleButton;
     @FXML
@@ -99,7 +85,7 @@ public class GameController {
     ArrayList<Double> rotateCoordinatesX = new ArrayList<>();
     ArrayList<Double> rotateCoordinatesY = new ArrayList<>();
     int[] numberOfRotate = new int[snakeLength];
-    int[] armortail = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    int[] armortail = {5, 4, 3, 1, 1, 1, 1, 1, 1, 1};
     int aimcontrol = 10;
     int startarmor;
     boolean buttonwasdelete = false;
@@ -184,9 +170,6 @@ public class GameController {
     }
 
 
-
-
-
     public void checkCollisionOfSnakeHeadAndApple() {
 
         if (appleButton.isVisible() && isFlagforapple()){
@@ -245,6 +228,14 @@ public class GameController {
             snake[visibleSnake].setVisible(true);
             visibleSnake+=1;
         }
+        if (armortail[visibleSnake-2] == 1){
+            armortail[visibleSnake-1] = 1;
+        }
+        else{
+            armortail[visibleSnake-1] = armortail[visibleSnake-2] - 1;
+        }
+        for (int i = 0; i < snakeLength; i++){
+        }
     }
 
     public void snakereduce(int a){
@@ -259,9 +250,8 @@ public class GameController {
         }
     }
 
-
     @FXML
-    void OnKeyPressed(KeyEvent event) throws IOException {
+    void OnKeyPressed(KeyEvent event){
         if ((snakeHead.getLayoutX() == snake[1].getLayoutX())  || (snakeHead.getLayoutY() == snake[1].getLayoutY())){
             if (snake[0].getLayoutX() == snake[1].getLayoutX() || snake[0].getLayoutY() == snake[1].getLayoutY()){
                 if (event.getCode() == KeyCode.W && direction != 'D' && direction != 'U') {
@@ -374,12 +364,11 @@ public class GameController {
     }
 
     public void gameOver() {
-        if (snakeHead.getLayoutX() <= 0 || snakeHead.getLayoutX() >= 700 - snakeHead.getWidth() || snakeHead.getLayoutY() <= 0 || snakeHead.getLayoutY() >= 700 - snakeHead.getHeight() || visibleSnake == 1){
+        if (snakeHead.getLayoutX() <= 0 || snakeHead.getLayoutX() >= 700 - snakeHead.getWidth() || snakeHead.getLayoutY() <= 0 || snakeHead.getLayoutY() >= 700 - snakeHead.getHeight() || visibleSnake < 3){
             finish = true;
             for (int i = 0; i < visibleSnake; i++){
                 snake[i].setVisible(false);
             }
-
             appleButton.setVisible(false);
             armorButton.setVisible(false);
             anotherGameButton.setVisible(true);
@@ -393,7 +382,6 @@ public class GameController {
             for (int i = 0; i < visibleSnake; i++){
                 snake[i].setVisible(false);
             }
-
             appleButton.setVisible(false);
             armorButton.setVisible(false);
             anotherGameButton1.setVisible(true);
@@ -401,8 +389,6 @@ public class GameController {
             VictoryImage.setVisible(true);
         }
     }
-
-
 
     public void ubivat(int a) {
         if (!snake[a].isVisible()) {
@@ -418,16 +404,6 @@ public class GameController {
             }
         }
     }
-
-//    @Override
-//    public String toString(){
-//        for (int i = 0; i < lengthOfArrayList; i++){
-//            System.out.println(rotateCoordinatesX.get(i));
-//            System.out.println(rotateCoordinatesY.get(i));
-//        }
-//        return "";
-//    }
-
 
 
     public void checkSnake(int i){

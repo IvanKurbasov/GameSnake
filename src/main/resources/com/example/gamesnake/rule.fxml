@@ -35,12 +35,12 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="20.0" layoutY="170.0" prefHeight="30.0" prefWidth="670.0" text="змейки, тем выше ее шансы выжить и продержаться на ">
+            <Label layoutX="20.0" layoutY="170.0" prefHeight="30.0" prefWidth="670.0" text="змейки, тем выше ее шансы выжить.">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="20.0" layoutY="200.0" prefHeight="30.0" prefWidth="670.0" text="поле игры в течение 3 минут.">
+            <Label layoutX="20.0" layoutY="200.0" prefHeight="30.0" prefWidth="670.0">
                <font>
                   <Font size="24.0" />
                </font>
@@ -70,7 +70,7 @@
                </graphic></Button>
          </children>
       </AnchorPane>
-      <Label layoutX="20.0" layoutY="350.0" prefHeight="30.0" prefWidth="670.0" text="Цель мышки - убить змейку до того, как пройдет 3 минуты.">
+      <Label layoutX="20.0" layoutY="350.0" prefHeight="30.0" prefWidth="670.0" text="Цель мышки - убить змейку до того, как она вырастит.">
          <font>
             <Font size="24.0" />
          </font>
@@ -95,7 +95,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="20.0" layoutY="500.0" prefHeight="30.0" prefWidth="670.0" text=" точно прицеливаться и стрелять, чтобы уничтожить">
+      <Label layoutX="20.0" layoutY="500.0" prefHeight="30.0" prefWidth="670.0" text="точно прицеливаться и стрелять, чтобы уничтожить">
          <font>
             <Font size="24.0" />
          </font>

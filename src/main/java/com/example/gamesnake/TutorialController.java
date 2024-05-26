@@ -5,8 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -19,7 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class TutorialController extends HelloApplication{
+public class TutorialController{
     public javafx.scene.image.ImageView appleImage;
     public javafx.scene.image.ImageView armorImage;
     public javafx.scene.image.ImageView GameOverImage;
@@ -35,8 +33,6 @@ public class TutorialController extends HelloApplication{
     private Button appleButton;
     @FXML
     private Button armorButton;
-    @FXML
-    private AnchorPane pane;
     @FXML
     private Button ToMenuButton;
     @FXML
@@ -106,7 +102,7 @@ public class TutorialController extends HelloApplication{
     ArrayList<Double> rotateCoordinatesX = new ArrayList<>();
     ArrayList<Double> rotateCoordinatesY = new ArrayList<>();
     int[] numberOfRotate = new int[snakeLength];
-    int[] armortail = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    int[] armortail = {5, 4, 3, 1, 1, 1, 1, 1, 1, 1, 1};
     int aimcontrol = 10;
     int startarmor;
     boolean buttonwasdelete = false;
@@ -153,9 +149,9 @@ public class TutorialController extends HelloApplication{
     }
 
     public void Stage2(){
-        text1.setText("                       Чтобы расти, змейке нужно кушать яблочки");
+        text1.setText("Чтобы расти, змейке нужно кушать яблочки");
         text2.setText("Каждый раз, когда она ест яблоко, она увеличивается в размере на 1");
-        text3.setText("");
+        text3.setText("Чтобы выиграть, змейка должна вырасти до 10");
         text4.setText("");
         text5.setText("");
         text6.setText("");
@@ -185,7 +181,7 @@ public class TutorialController extends HelloApplication{
 
     public void Stage5(){
         text1.setText("Если вы, управляя змейкой, коснетесь границ поля или ваша длина");
-        text2.setText("станет равна 1, вы проиграете. Попробуйте специально врезаться в");
+        text2.setText("станет меньше 3, вы проиграете. Попробуйте специально врезаться в");
         text3.setText("край или дождитесь, пока мышка уничтожит вас");
         text4.setText("");
         text5.setText("");
@@ -242,7 +238,7 @@ public class TutorialController extends HelloApplication{
 
     public void gameOver() {
         if (currentStage == 5) {
-            if (snakeHead.getLayoutX() <= 0 || snakeHead.getLayoutX() >= 700 - snakeHead.getWidth() || snakeHead.getLayoutY() <= 0 || snakeHead.getLayoutY() >= 700 - snakeHead.getHeight() || visibleSnake == 1) {
+            if (snakeHead.getLayoutX() <= 0 || snakeHead.getLayoutX() >= 700 - snakeHead.getWidth() || snakeHead.getLayoutY() <= 0 || snakeHead.getLayoutY() >= 700 - snakeHead.getHeight() || visibleSnake <= 3) {
                 finish = true;
                 for (int i = 0; i < visibleSnake; i++) {
                     snake[i].setVisible(false);
@@ -354,7 +350,13 @@ public class TutorialController extends HelloApplication{
             snake[visibleSnake].setVisible(true);
             visibleSnake+=1;
         }
+        if (armortail[visibleSnake-2] == 1){
+            armortail[visibleSnake-1] = 1;
+        }
         else{
+            armortail[visibleSnake-1] = armortail[visibleSnake-2] - 1;
+        }
+        for (int i = 0; i < snakeLength; i++){
         }
     }
 

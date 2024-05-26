@@ -1,13 +1,10 @@
 package com.example.gamesnake;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
-import java.beans.EventHandler;
 import java.io.IOException;
 
 public class HelloApplication extends Application {

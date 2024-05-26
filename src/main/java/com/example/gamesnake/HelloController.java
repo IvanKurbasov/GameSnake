@@ -23,14 +23,7 @@ public class HelloController {
     private Button RuleButton;
 
     @FXML
-    private Button StartButton;
-    @FXML
-    private Button TutorialButton;
-
-    @FXML
     void initialize() {
-        //StartButton.setBackground(null);
-        //RuleButton.setBackground(null);
     }
     @FXML
     void RuleButtonClicked(MouseEvent event) throws IOException {
