@@ -191,13 +191,15 @@ public class TutorialController{
     public void armorhelp() {
         if (random.nextFloat(1) < 0.998) {
             coordinatesOfDefX = random.nextInt(600) + 50;
-            coordinatesOfDefY = random.nextInt(400) + 150;
+            coordinatesOfDefY = random.nextInt(600) + 50;
+            help = true;
             for (int i = 0; i <= snakeLength - 1; i++) {
                 if (Math.abs(snake[i].getLayoutX() - coordinatesOfDefX) < 30 || Math.abs(snake[i].getLayoutY() - coordinatesOfDefY) < 30) {
                     help = false;
                     break;
-                } else {
-                    help = true;
+                }
+                if (Math.abs(coordinatesOfAppleX - coordinatesOfDefX) < 30 || Math.abs(coordinatesOfAppleY - coordinatesOfDefY) < 30){
+                    help = false;
                 }
             }
         }
@@ -281,23 +283,25 @@ public class TutorialController{
         }
     }
 
-    public void Apple(){
-        if (random.nextFloat(1) < 0.995){
-            coordinatesOfAppleX = random.nextInt(600) + 50;
-            coordinatesOfAppleY = random.nextInt(460) + 160;
-            newApple = true;
+    public void Apple() {
+        coordinatesOfAppleX = random.nextInt(600) + 50;
+        coordinatesOfAppleY = random.nextInt(600) + 50;
+        newApple = true;
 
-            for (int i = 0; i <= snakeLength - 1; i++){
-                if (Math.abs(snake[i].getLayoutX() - coordinatesOfAppleX) < 30 || Math.abs(snake[i].getLayoutY() - coordinatesOfAppleY) < 30){
-                    newApple = false;
-                }
+        for (int i = 0; i <= snakeLength - 1; i++){
+            if (Math.abs(snake[i].getLayoutX() - coordinatesOfAppleX) < 30 || Math.abs(snake[i].getLayoutY() - coordinatesOfAppleY) < 30){
+                newApple = false;
             }
+        }
 
-            if (newApple && (!appleButton.isVisible())){
-                appleButton.setVisible(true);
-                appleButton.setLayoutX(coordinatesOfAppleX);
-                appleButton.setLayoutY(coordinatesOfAppleY);
-            }
+        if (Math.abs(coordinatesOfAppleX - coordinatesOfDefX) < 30 || Math.abs(coordinatesOfAppleY - coordinatesOfDefY) < 30){
+            newApple = false;
+        }
+
+        if (newApple && (!appleButton.isVisible())){
+            appleButton.setVisible(true);
+            appleButton.setLayoutX(coordinatesOfAppleX);
+            appleButton.setLayoutY(coordinatesOfAppleY);
         }
     }
 

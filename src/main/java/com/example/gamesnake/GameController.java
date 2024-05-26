@@ -91,8 +91,6 @@ public class GameController {
 
     @FXML
     void initialize() {
-
-
         snake[0] = snakeHead;
         snake[1] = snakeTail1;
         snake[2] = snakeTail2;
@@ -140,6 +138,10 @@ public class GameController {
             }
         }
 
+        if (Math.abs(coordinatesOfAppleX - coordinatesOfDefX) < 30 || Math.abs(coordinatesOfAppleY - coordinatesOfDefY) < 30){
+            newApple = false;
+        }
+
         if (newApple && (!appleButton.isVisible())){
             appleButton.setVisible(true);
             appleButton.setLayoutX(coordinatesOfAppleX);
@@ -151,12 +153,14 @@ public class GameController {
         if (random.nextFloat(1) < 0.998) {
             coordinatesOfDefX = random.nextInt(600) + 50;
             coordinatesOfDefY = random.nextInt(600) + 50;
+            help = true;
             for (int i = 0; i <= snakeLength - 1; i++) {
                 if (Math.abs(snake[i].getLayoutX() - coordinatesOfDefX) < 30 || Math.abs(snake[i].getLayoutY() - coordinatesOfDefY) < 30) {
                     help = false;
                     break;
-                } else {
-                    help = true;
+                }
+                if (Math.abs(coordinatesOfAppleX - coordinatesOfDefX) < 30 || Math.abs(coordinatesOfAppleY - coordinatesOfDefY) < 30){
+                    help = false;
                 }
             }
         }
