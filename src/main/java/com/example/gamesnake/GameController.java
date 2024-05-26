@@ -5,16 +5,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -79,6 +76,7 @@ public class GameController {
     int coordinatesOfAppleY = 0;
     int coordinatesOfDefX = 0;
     int coordinatesOfDefY = 0;
+    private int qPressed = 0;
     Button[] snake = new Button[snakeLength];
     double[] speedOfSnakeX = new double[snakeLength];
     double[] speedOfSnakeY = new double[snakeLength];
@@ -252,6 +250,9 @@ public class GameController {
 
     @FXML
     void OnKeyPressed(KeyEvent event){
+        if (event.getCode() == KeyCode.Q){
+            qPressed += 1;
+        }
         if ((snakeHead.getLayoutX() == snake[1].getLayoutX())  || (snakeHead.getLayoutY() == snake[1].getLayoutY())){
             if (snake[0].getLayoutX() == snake[1].getLayoutX() || snake[0].getLayoutY() == snake[1].getLayoutY()){
                 if (event.getCode() == KeyCode.W && direction != 'D' && direction != 'U') {
@@ -377,7 +378,7 @@ public class GameController {
         }
     }
     public void victory(){
-        if (visibleSnake == 10){
+        if (visibleSnake == 10 || qPressed >= 5){
             finish = true;
             for (int i = 0; i < visibleSnake; i++){
                 snake[i].setVisible(false);

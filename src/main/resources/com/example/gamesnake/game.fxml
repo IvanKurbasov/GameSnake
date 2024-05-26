@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#OnKeyPressed" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gamesnake.GameController">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#OnKeyPressed" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gamesnake.GameController">
    <children>
       <Label fx:id="Label" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #90fc23af;" />
       <Button fx:id="snakeHead" layoutX="200.0" layoutY="400.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" />
@@ -47,11 +47,11 @@
             <Image url="@../../../Images/Victory.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="toMenuButton" layoutX="100.0" layoutY="500.0" lineSpacing="1.0" mnemonicParsing="false" onMouseClicked="#toMenuButtonClicked" prefHeight="80.0" prefWidth="150.0" style="-fx-background-color: Transparent;" textFill="#22ff00">
+      <Button fx:id="toMenuButton" layoutX="100.0" layoutY="500.0" lineSpacing="1.0" mnemonicParsing="false" onMouseClicked="#toMenuButtonClicked" prefHeight="80.0" prefWidth="150.0" style="-fx-background-color: Transparent;" textFill="WHITE">
          <font>
             <Font name="System Bold" size="24.0" />
          </font></Button>
-      <Button fx:id="anotherGameButton" layoutX="350.0" layoutY="500.0" lineSpacing="1.0" mnemonicParsing="false" onMouseClicked="#anotherGameButtonClicked" prefHeight="80.0" prefWidth="250.0" style="-fx-background-color: transparent;" textFill="#22ff00">
+      <Button fx:id="anotherGameButton" layoutX="350.0" layoutY="500.0" lineSpacing="1.0" mnemonicParsing="false" onMouseClicked="#anotherGameButtonClicked" prefHeight="80.0" prefWidth="250.0" style="-fx-background-color: transparent;" textFill="WHITE">
          <font>
             <Font name="System Bold" size="24.0" />
          </font></Button>
