@@ -31,6 +31,7 @@ public class GameController {
     public javafx.scene.image.ImageView appleImage;
     public javafx.scene.image.ImageView armorImage;
     public javafx.scene.image.ImageView GameOverImage;
+    public javafx.scene.image.ImageView VictoryImage;
 
     @FXML
     private ResourceBundle resources;
@@ -76,6 +77,10 @@ public class GameController {
     private Button anotherGameButton;
     @FXML
     private Button toMenuButton;
+    @FXML
+    private Button anotherGameButton1;
+    @FXML
+    private Button toMenuButton1;
     double speed = 2;
     boolean newApple = false;
     boolean help = false;
@@ -125,6 +130,10 @@ public class GameController {
         GameOverImage.setVisible(false);
         anotherGameButton.setText("Играть еще раз");
         toMenuButton.setText("Меню");
+        anotherGameButton1.setVisible(false);
+        toMenuButton1.setVisible(false);
+        anotherGameButton1.setText("Играть еще раз");
+        toMenuButton1.setText("Меню");
 
         for (int i = 0; i < snakeLength; i++){
             speedOfSnakeX[i] = 0;
@@ -190,8 +199,6 @@ public class GameController {
 
     public void checkCollisionOfSnakeHeadAndarmorButton() {
         if (armorButton.isVisible() && isFlagforarmor()) {
-            System.out.println(armorButton.getLayoutX());
-            System.out.println(armorButton.getLayoutY());
             armorButton.setVisible(false);
             coordinatesOfDefX = 0;
             coordinatesOfDefY = 0;
@@ -380,6 +387,20 @@ public class GameController {
             GameOverImage.setVisible(true);
         }
     }
+    public void victory(){
+        if (visibleSnake == 10){
+            finish = true;
+            for (int i = 0; i < visibleSnake; i++){
+                snake[i].setVisible(false);
+            }
+
+            appleButton.setVisible(false);
+            armorButton.setVisible(false);
+            anotherGameButton1.setVisible(true);
+            toMenuButton1.setVisible(true);
+            VictoryImage.setVisible(true);
+        }
+    }
 
 
 
@@ -449,6 +470,7 @@ public class GameController {
                     checkCollisionOfSnakeHeadAndarmorButton();
 
                     gameOver();
+                    victory();
 
                     if (finish){
                         break;

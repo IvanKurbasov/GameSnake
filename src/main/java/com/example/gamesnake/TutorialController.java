@@ -174,7 +174,7 @@ public class TutorialController extends HelloApplication{
     public void Stage4() {
         snake[1].setVisible(true);
         snake[2].setVisible(true);
-        visibleSnake = 3;
+        visibleSnake += 2;
         text1.setText("На поле будут появляться щиты. Они создают броню для хвоста. Это");
         text2.setText("повысит выживаемость змейки. Старайтесь собирать щиты как можно");
         text3.setText("быстрее. Совет: двигайтесь очень странно, извилисто и");
