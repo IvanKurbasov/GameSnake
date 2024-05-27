@@ -1,5 +1,7 @@
 package com.example.gamesnake;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -84,7 +87,7 @@ public class TutorialController{
     private int snakeLength = 10;
     int lengthOfArrayList = 0;
     char direction = 'U';
-    private int speed = 2;
+    private int speed = 4;
     private int currentStage = 1;
     private int wPressed = 0;
     private int sPressed = 0;
@@ -495,12 +498,7 @@ public class TutorialController{
     }
 
     public void move(){
-        Thread thread = new Thread(() -> {
-            while (true) {
-
-                if (finish){
-                    break;
-                }
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), event -> {
 
                 if (needToCreateApple){
                     Apple();
@@ -576,14 +574,12 @@ public class TutorialController{
                         }
                     }
                 }
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            }));
+            timeline.setCycleCount(Timeline.INDEFINITE);
+            timeline.play();
+            if (finish){
+                timeline.stop();
             }
-        });
-        thread.start();
     }
 
     @FXML

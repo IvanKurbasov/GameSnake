@@ -1,5 +1,7 @@
 package com.example.gamesnake;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,6 +12,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -64,7 +67,7 @@ public class GameController {
     private Button anotherGameButton1;
     @FXML
     private Button toMenuButton1;
-    double speed = 2;
+    double speed = 4;
     boolean newApple = false;
     boolean help = false;
     boolean finish = false;
@@ -83,7 +86,7 @@ public class GameController {
     ArrayList<Double> rotateCoordinatesX = new ArrayList<>();
     ArrayList<Double> rotateCoordinatesY = new ArrayList<>();
     int[] numberOfRotate = new int[snakeLength];
-    int[] armortail = {5, 4, 3, 1, 1, 1, 1, 1, 1, 1};
+    int[] armortail = {6, 5, 4, 1, 1, 1, 1, 1, 1, 1};
     int aimcontrol = 10;
     int startarmor;
     boolean buttonwasdelete = false;
@@ -438,61 +441,50 @@ public class GameController {
         }
     }
     public void move(){
-        Thread thread = new Thread(new Runnable()
-        {
-            public void run()
-            {
-                while (true) {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), event -> {
 
-                    Apple();
-                    armorhelp();
+                Apple();
+                armorhelp();
 
-                    checkCollisionOfSnakeHeadAndApple();
-                    checkCollisionOfSnakeHeadAndarmorButton();
+                checkCollisionOfSnakeHeadAndApple();
+                checkCollisionOfSnakeHeadAndarmorButton();
 
-                    gameOver();
-                    victory();
+                gameOver();
+                victory();
 
-                    if (finish){
-                        break;
+                for (int i = snakeLength - 1; i >= 0; i--){
+                    if (i == 0){
+                        snakeHead.setLayoutX(snakeHead.getLayoutX() + speedOfSnakeX[0]);
+                        snakeHead.setLayoutY(snakeHead.getLayoutY() + speedOfSnakeY[0]);
                     }
+                    else{
 
-                    for (int i = snakeLength - 1; i >= 0; i--){
-                        if (i == 0){
-                            snakeHead.setLayoutX(snakeHead.getLayoutX() + speedOfSnakeX[0]);
-                            snakeHead.setLayoutY(snakeHead.getLayoutY() + speedOfSnakeY[0]);
-                        }
-                        else{
+                        checkSnake(i);
 
-                            checkSnake(i);
+                        snake[i].setLayoutX(snake[i].getLayoutX() + speedOfSnakeX[i]);
+                        snake[i].setLayoutY(snake[i].getLayoutY() + speedOfSnakeY[i]);
 
-                            snake[i].setLayoutX(snake[i].getLayoutX() + speedOfSnakeX[i]);
-                            snake[i].setLayoutY(snake[i].getLayoutY() + speedOfSnakeY[i]);
-
-                            if (!rotateCoordinatesX.isEmpty() && (lengthOfArrayList > numberOfRotate[i])){
-                                if ((rotateCoordinatesX.get(numberOfRotate[i]) == snake[i].getLayoutX()) && (rotateCoordinatesY.get(numberOfRotate[i]) == snake[i].getLayoutY())){
-                                    if (i == 1){
-                                        speedOfSnakeX[i] = speedOfSnakeX[0];
-                                        speedOfSnakeY[i] = speedOfSnakeY[0];
-                                    }
-                                    else{
-                                        speedOfSnakeX[i] = speedOfSnakeX[i-1];
-                                        speedOfSnakeY[i] = speedOfSnakeY[i-1];
-                                    }
-                                    numberOfRotate[i]++;
+                        if (!rotateCoordinatesX.isEmpty() && (lengthOfArrayList > numberOfRotate[i])){
+                            if ((rotateCoordinatesX.get(numberOfRotate[i]) == snake[i].getLayoutX()) && (rotateCoordinatesY.get(numberOfRotate[i]) == snake[i].getLayoutY())){
+                                if (i == 1){
+                                    speedOfSnakeX[i] = speedOfSnakeX[0];
+                                    speedOfSnakeY[i] = speedOfSnakeY[0];
                                 }
+                                else{
+                                    speedOfSnakeX[i] = speedOfSnakeX[i-1];
+                                    speedOfSnakeY[i] = speedOfSnakeY[i-1];
+                                }
+                                numberOfRotate[i]++;
                             }
                         }
                     }
-                    try {
-                        Thread.sleep(10);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
                 }
-            }
-        });
-        thread.start();
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+        if (finish){
+            timeline.stop();
+        }
     }
 
 
