@@ -21,6 +21,7 @@ public class TutorialController{
     public javafx.scene.image.ImageView appleImage;
     public javafx.scene.image.ImageView armorImage;
     public javafx.scene.image.ImageView GameOverImage;
+    public javafx.scene.image.ImageView VictoryImage;
     boolean newApple = false;
     boolean help = false;
     int coordinatesOfAppleX = 0;
@@ -113,9 +114,9 @@ public class TutorialController{
         text1.setText("                                                        Привет!");
         text2.setText("                               Давай научимся играть в эту игру!");
         text3.setText("                 Для управления змейкой нажимайте на клавиатуру:");
-        text4.setText("                        W - вверх, S - вниз, A - влево, D - вправо");
-        text5.setText("        Если змейка движется вверх, то нельзя нажимать кнопку 'вниз'");
-        text6.setText("        Если змейка движется влево, то нельзя нажимать кнопку 'вправо'");
+        text4.setText("                        W - вверх, S - вниз, A - влево, D - вправо.");
+        text5.setText("        Если змейка движется вверх, то нельзя нажимать кнопку 'вниз.'");
+        text6.setText("        Если змейка движется влево, то нельзя нажимать кнопку 'вправо.'");
 
         snake[0] = snakeHead;
         snake[1] = snakeTail1;
@@ -149,9 +150,9 @@ public class TutorialController{
     }
 
     public void Stage2(){
-        text1.setText("Чтобы расти, змейке нужно кушать яблочки");
-        text2.setText("Каждый раз, когда она ест яблоко, она увеличивается в размере на 1");
-        text3.setText("Чтобы выиграть, змейка должна вырасти до 10");
+        text1.setText("Чтобы расти, змейке нужно кушать яблочки.");
+        text2.setText("Каждый раз, когда она ест яблоко, она увеличивается в размере на 1.");
+        text3.setText("Чтобы выиграть, змейка должна вырасти до 10.");
         text4.setText("");
         text5.setText("");
         text6.setText("");
@@ -159,8 +160,8 @@ public class TutorialController{
     }
 
     public void Stage3(){
-        text1.setText("      Игрок, управляющей мышкой, должен пытаться убить змейку");
-        text2.setText("Каждый раз, когда он нажмет на хвост змеи, его жизни уменьшатся");
+        text1.setText("Игрок, управляющей мышкой, должен пытаться убить змейку.");
+        text2.setText("Каждый раз, когда он нажмет на хвост змеи, его жизни уменьшатся.");
         text3.setText("Если жизни опустятся до 0, весь хвост ниже уничтоженной кнопки тоже");
         text4.setText("исчезнет. Нажимайте на хвост змейки, чтобы уничтожить его. Учтите,");
         text5.setText("что каждый хвост имеет свои жизни. Если нажать на другой хвост, то");
@@ -170,7 +171,12 @@ public class TutorialController{
     public void Stage4() {
         snake[1].setVisible(true);
         snake[2].setVisible(true);
-        visibleSnake += 2;
+        if (visibleSnake == 1){
+            visibleSnake += 2;
+        }
+        else{
+            visibleSnake += 1;
+        }
         text1.setText("На поле будут появляться щиты. Они создают броню для хвоста. Это");
         text2.setText("повысит выживаемость змейки. Старайтесь собирать щиты как можно");
         text3.setText("быстрее. Совет: двигайтесь очень странно, извилисто и");
@@ -190,8 +196,8 @@ public class TutorialController{
 
     public void armorhelp() {
         if (random.nextFloat(1) < 0.998) {
-            coordinatesOfDefX = random.nextInt(600) + 50;
-            coordinatesOfDefY = random.nextInt(600) + 50;
+            coordinatesOfDefX = random.nextInt(300) + 200;
+            coordinatesOfDefY = random.nextInt(300) + 200;
             help = true;
             for (int i = 0; i <= snakeLength - 1; i++) {
                 if (Math.abs(snake[i].getLayoutX() - coordinatesOfDefX) < 30 || Math.abs(snake[i].getLayoutY() - coordinatesOfDefY) < 30) {
@@ -202,11 +208,11 @@ public class TutorialController{
                     help = false;
                 }
             }
-        }
-        if (help && (!armorButton.isVisible())) {
-            armorButton.setVisible(true);
-            armorButton.setLayoutX(coordinatesOfDefX);
-            armorButton.setLayoutY(coordinatesOfDefY);
+            if (help && (!armorButton.isVisible())) {
+                armorButton.setVisible(true);
+                armorButton.setLayoutX(coordinatesOfDefX);
+                armorButton.setLayoutY(coordinatesOfDefY);
+            }
         }
     }
 
@@ -248,7 +254,8 @@ public class TutorialController{
 
                 appleButton.setVisible(false);
                 armorButton.setVisible(false);
-                GameOverImage.setVisible(true);
+                VictoryImage.setVisible(true);
+                //GameOverImage.setVisible(true);
                 toMenuButtonAfterTutorial.setVisible(true);
                 text7.setText("Поздравляю, вы прошли обучение! Теперь вы готовы к настоящей игре!");
 
@@ -284,8 +291,8 @@ public class TutorialController{
     }
 
     public void Apple() {
-        coordinatesOfAppleX = random.nextInt(600) + 50;
-        coordinatesOfAppleY = random.nextInt(600) + 50;
+        coordinatesOfAppleX = random.nextInt(300) + 200;
+        coordinatesOfAppleY = random.nextInt(300) + 200;
         newApple = true;
 
         for (int i = 0; i <= snakeLength - 1; i++){
@@ -523,7 +530,7 @@ public class TutorialController{
                     startStage3 = false;
                 }
 
-                if (visibleSnake == 1 && currentStage == 3 && startStage4){
+                if (visibleSnake < 3 && currentStage == 3 && startStage4){
                     currentStage = 4;
                     speed = speed * 2;
                     for (int i = 0; i < snakeLength; i++){

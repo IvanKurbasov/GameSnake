@@ -79,12 +79,17 @@
             <Image url="@../../../Images/GameOver.jpg" />
          </image>
       </ImageView>
-      <Text fx:id="text7" fill="WHITE" layoutX="53.0" layoutY="547.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="600.0">
+      <ImageView fx:id="VictoryImage" fitHeight="709.0" fitWidth="709.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true" style="visibility: false;">
+         <image>
+            <Image url="@../../../Images/Victory.jpg" />
+         </image>
+      </ImageView>
+      <Text fx:id="text7" fill="WHITE" layoutX="34.0" layoutY="617.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="640.000002861023">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Button fx:id="toMenuButtonAfterTutorial" layoutX="277.0" layoutY="562.0" mnemonicParsing="false" onMouseClicked="#toMenuButtonAfterTutorialClicked" prefHeight="96.0" prefWidth="152.0" style="-fx-background-color: transparent;" textFill="WHITE">
+      <Button fx:id="toMenuButtonAfterTutorial" layoutX="274.0" layoutY="590.0" mnemonicParsing="false" onMouseClicked="#toMenuButtonAfterTutorialClicked" prefHeight="96.0" prefWidth="152.0" style="-fx-background-color: transparent;" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
